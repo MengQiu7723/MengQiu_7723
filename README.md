@@ -1,16 +1,16 @@
 # 35前端仓库
 
-## Project setup 项目安装
+## 项目安装
 ```
 npm install
 ```
 
-### Compiles and hot-reloads for development 热部署
+### 热部署及重新加载
 ```
 npm run serve
 ```
 
-### Compiles and minifies for production 打包
+### Compiles and minifies for production
 ```
 npm run build
 ```
