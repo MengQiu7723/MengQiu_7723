@@ -1,16 +1,20 @@
-# 35前端仓库
+# 35前端
 
-## 项目安装
+## 克隆项目到本地
+```
+git clone git@github.com:MengQiu7723/MengQiu_7723.git
+```
+## 安装项目依赖
 ```
 npm install
 ```
 
-### 热部署及重新加载
+## 部署项目
 ```
 npm run serve
 ```
 
-### Compiles and minifies for production
+### 生产构建
 ```
 npm run build
 ```
