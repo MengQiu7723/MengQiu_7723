@@ -9,20 +9,20 @@ git clone git@github.com:MengQiu7723/MengQiu_7723.git
 npm install
 ```
 
-## 部署项目
+## 编绎和热更新（用于开发环境）
 ```
 npm run serve
 ```
 
-### 生产构建
+### 编译并压缩（用于生产环境）
 ```
 npm run build
 ```
 
-### Lints and fixes files
+### 检查并修复源文件
 ```
 npm run lint
 ```
 
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+### 自定义配置
+请查看 [Configuration Reference](https://cli.vuejs.org/config/).

@@ -13,7 +13,12 @@
       <!-- 侧边栏 -->
       <el-aside width="250px">
         <!-- 侧边导航栏 -->
-        <el-menu background-color="#314056" text-color="#FFF" router>
+        <el-menu
+          background-color="#314056"
+          text-color="#FFF"
+          router
+          :default-active="activePath"
+        >
           <el-menu-item>
             <!-- 图标 -->
             <i class="el-icon-monitor"></i>
@@ -35,13 +40,15 @@
               <span>{{ item.authName }}</span>
             </template>
 
-            <!-- 一级菜单的可选项 -->
+            <!-- 二级菜单 -->
             <el-menu-item
               :index="'/' + subItem.path"
               v-for="subItem in item.children"
               :key="subItem.id"
+              @click="saveNavState('/' + subItem.path)"
               >{{ subItem.authName }}</el-menu-item
             >
+            <!-- 二级菜单结束 -->
 
             <!-- 二级菜单 
             <el-submenu :index="subItem.id+''"
@@ -70,6 +77,7 @@
 export default {
   data() {
     return {
+      //左侧菜单数据
       menulist: [
         {
           id: 101,
@@ -93,12 +101,22 @@ export default {
           children: [{ id: 133, authName: "订单管理的选项" }],
         },
       ],
+      //被激活的链接地址
+      activePath: "",
     };
+  },
+  created() {
+    this.activePath = window.sessionStorage.getItem("activePath");
   },
   methods: {
     logout() {
       // window.sessionStorage.clear();
       this.$router.push("/login");
+    },
+    //保存链接的激活状态
+    saveNavState(activePath) {
+      window.sessionStorage.setItem("activePath", activePath);
+      this.activePath = activePath;
     },
   },
   handleOpen(key, keyPath) {

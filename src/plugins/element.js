@@ -13,6 +13,9 @@ import {
   Submenu,
   MenuItemGroup,
   MenuItem,
+  //面包屑组件
+  Breadcrumb,
+  BreadcrumbItem
 } from 'element-ui'
 
 Vue.use(Button)
@@ -27,4 +30,7 @@ Vue.use(Menu)
 Vue.use(Submenu)
 Vue.use(MenuItemGroup)
 Vue.use(MenuItem)
+//面包屑组件
+Vue.use(Breadcrumb)
+Vue.use(BreadcrumbItem)
 Vue.prototype.$message = Message
