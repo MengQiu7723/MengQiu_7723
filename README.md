@@ -3,6 +3,7 @@
 ## 克隆项目到本地
 ```
 git clone git@github.com:MengQiu7723/MengQiu_7723.git
+git clone https://github.com/MengQiu7723/MengQiu_7723.git
 ```
 ## 安装项目依赖
 ```
