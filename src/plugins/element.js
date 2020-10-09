@@ -15,7 +15,11 @@ import {
   MenuItem,
   //面包屑组件
   Breadcrumb,
-  BreadcrumbItem
+  BreadcrumbItem,
+  Table,
+  Card,
+  Row,
+  TableColumn,
 } from 'element-ui'
 
 Vue.use(Button)
@@ -33,4 +37,9 @@ Vue.use(MenuItem)
 //面包屑组件
 Vue.use(Breadcrumb)
 Vue.use(BreadcrumbItem)
+Vue.use(Table)
+Vue.use(Card)
+Vue.use(Row)
+Vue.use(TableColumn)
 Vue.prototype.$message = Message
+
