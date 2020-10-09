@@ -27,7 +27,9 @@ export default {
         pagenum: 1,
         pagesize: 10,
       },
-    };
+      total:0,
+      orderList:[]
+    }
   },
   created() {
     this.getOrderList();
@@ -41,10 +43,12 @@ export default {
       if (res.meta.status !== 200) {
         return this.$message.error("获取订单列表失败! ");
       }
-      console.log(res);
-    },
-  },
-};
+      console.log(res)
+      this.total = res.data.total
+      this.orderList = res.data.goods
+    }
+  }
+}
 </script>
 
 <style lang="less" scoped>
