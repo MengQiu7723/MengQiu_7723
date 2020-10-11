@@ -10,6 +10,8 @@ import Users02 from '../components/user/Users02.vue'
 import Product from '../components/product/Product.vue'
 import Product02 from '../components/product/Product02.vue'
 
+import Order from '../components/product/Order.vue'
+
 Vue.use(Router)
 
 const router = new Router({
@@ -24,6 +26,7 @@ const router = new Router({
         { path: '/users02', component: Users02 },
         { path: '/product', component: Product },
         { path: '/product02', component: Product02 },
+        { path: '/order', component: Order },
       ]
     },
   ],

@@ -102,7 +102,9 @@ export default {
         {
           id: 103,
           authName: "订单管理",
-          children: [{ id: 133, authName: "订单管理的选项" }],
+          children: [
+            { id: 133, authName: "订单列表", path: "order" },
+            ],
         },
       ],
       //被激活的链接地址
