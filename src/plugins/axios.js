@@ -35,9 +35,9 @@ _axios.interceptors.response.use(
   },
   function (error) {
     // Do something with response error
-    return Promise.reject(error);
+    return Promise.reject(error)
   }
-);
+)
 
 Plugin.install = function (Vue, options) {
   Vue.axios = _axios;
@@ -52,10 +52,10 @@ Plugin.install = function (Vue, options) {
       get() {
         return _axios;
       }
-    },
-  });
-};
+    }
+  })
+}
 
 Vue.use(Plugin)
 
-export default Plugin;
+export default Plugin
