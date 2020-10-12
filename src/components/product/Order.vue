@@ -65,7 +65,6 @@ export default {
       orderList: [{
         order_number:'测试数据',
         order_price:'40',
-        pay_status:'是',
         is_send:'是',
         create_time:'20150952',
         pay_status:'0'
