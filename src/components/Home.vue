@@ -95,7 +95,7 @@ export default {
           id: 102,
           authName: "商品管理",
           children: [
-            { id: 122, authName: "商品--", path: "product" },
+            { id: 122, authName: "商品列表", path: "product" },
             { id: 123, authName: "--管理", path: "product02" }
           ]
         },
