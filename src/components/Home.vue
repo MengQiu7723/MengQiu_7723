@@ -6,7 +6,10 @@
         <!-- <img src="../assets/heima.png" alt=""> -->
         <span>35后台管理系统</span>
       </div>
-      <el-button type="info" @click="logout">退出</el-button>
+      <el-button
+        type="info"
+        @click="logout"
+      >退出</el-button>
     </el-header>
     <!-- 页面主体 -->
     <el-container>
@@ -46,8 +49,9 @@
               v-for="subItem in item.children"
               :key="subItem.id"
               @click="saveNavState('/' + subItem.path)"
-              >{{ subItem.authName }}</el-menu-item
             >
+              {{ subItem.authName }}
+            </el-menu-item>
             <!-- 二级菜单结束 -->
 
             <!-- 二级菜单 
@@ -75,7 +79,7 @@
 
 <script>
 export default {
-  data() {
+  data () {
     return {
       //左侧菜单数据
       menulist: [
@@ -83,7 +87,7 @@ export default {
           id: 101,
           authName: "用户管理",
           children: [
-            { id: 111, authName: "用户--", path: "users" },
+            { id: 111, authName: "用户列表", path: "users" },
             { id: 112, authName: "--管理", path: "users02" },
           ],
         },
@@ -107,24 +111,24 @@ export default {
       activePath: "",
     };
   },
-  created() {
+  created () {
     this.activePath = window.sessionStorage.getItem("activePath");
   },
   methods: {
-    logout() {
+    logout () {
       // window.sessionStorage.clear();
       this.$router.push("/login");
     },
     //保存链接的激活状态
-    saveNavState(activePath) {
+    saveNavState (activePath) {
       window.sessionStorage.setItem("activePath", activePath);
       this.activePath = activePath;
     },
   },
-  handleOpen(key, keyPath) {
+  handleOpen (key, keyPath) {
     console.log(key, keyPath);
   },
-  handleClose(key, keyPath) {
+  handleClose (key, keyPath) {
     console.log(key, keyPath);
   },
 };
