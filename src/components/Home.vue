@@ -88,24 +88,41 @@ export default {
           authName: "用户管理",
           children: [
             { id: 111, authName: "用户列表", path: "users" },
-            { id: 112, authName: "--管理", path: "users02" },
-          ],
+            { id: 112, authName: "--管理", path: "users02" }
+          ]
         },
         {
           id: 102,
           authName: "商品管理",
           children: [
             { id: 122, authName: "商品--", path: "product" },
-            { id: 123, authName: "--管理", path: "product02" },
-          ],
+            { id: 123, authName: "--管理", path: "product02" }
+          ]
         },
         {
           id: 103,
           authName: "订单管理",
           children: [
-            { id: 133, authName: "订单列表", path: "order" },
-            ],
+            { id: 133, authName: "订单列表", path: "order" }
+          ]
         },
+        {
+          id: 104,
+          authName: "服务管理",
+          children: [
+            { id: 144, authName: "公告箮理", path: 'announcement' },
+            { id: 145, authName: '广告管理', path: 'advertising' },
+            { id: 146, authName: '皮肤管理', path: 'skin' }
+          ]
+        },
+        {
+          id: 105,
+          authName: "统计管理",
+          children: [
+            { id: 155, authName: "商品销售排行", path: 'rank' },
+            { id: 156, authName: '商品销售图表', path: 'chart' }
+          ]
+        }
       ],
       //被激活的链接地址
       activePath: "",
@@ -115,14 +132,14 @@ export default {
     this.activePath = window.sessionStorage.getItem("activePath");
   },
   methods: {
-    logout () {
-      // window.sessionStorage.clear();
-      this.$router.push("/login");
-    },
     //保存链接的激活状态
     saveNavState (activePath) {
       window.sessionStorage.setItem("activePath", activePath);
       this.activePath = activePath;
+    },
+    logout () {
+      window.sessionStorage.clear();
+      this.$router.push("/login");
     },
   },
   handleOpen (key, keyPath) {
