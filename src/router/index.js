@@ -12,12 +12,22 @@ import Product02 from '../components/product/Product02.vue'
 
 import Order from '../components/product/Order.vue'
 
+import Ad from '../components/back/service/Ad.vue'
+import An from '../components/back/service/Announcement.vue'
+import Skin from '../components/back/service/Skin.vue'
+
+import Chart from '../components/back/statistics/Chart.vue'
+import Rank from '../components/back/statistics/Rank.vue'
+
 Vue.use(Router)
 
 const router = new Router({
   routes: [
     { path: '/', redirect: '/login' },
     { path: '/login', component: Login },
+    //前台
+    // {},
+    //后台管理系统
     {
       path: '/home', component: Home, redirect: '/welcome',
       children: [
@@ -27,10 +37,15 @@ const router = new Router({
         { path: '/product', component: Product },
         { path: '/product02', component: Product02 },
         { path: '/order', component: Order },
+        { path: '/advertising', component: Ad },
+        { path: '/announcement', component: An },
+        { path: '/skin', component: Skin },
+        { path: '/chart', component: Chart },
+        { path: '/rank', component: Rank }
       ]
-    },
-  ],
-});
+    }
+  ]
+})
 
 //挂载路由守卫 没有token，做不了验证2020.09.28
 // router.beforeEach((to, from, next) => {

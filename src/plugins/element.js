@@ -17,7 +17,9 @@ import {
   Breadcrumb,
   BreadcrumbItem,
   //卡片视图
-  Card
+  Card,
+  Row,
+  Col
 } from 'element-ui'
 
 Vue.use(Button)
@@ -37,4 +39,6 @@ Vue.use(Breadcrumb)
 Vue.use(BreadcrumbItem)
 //卡片视图
 Vue.use(Card)
+Vue.use(Row)
+Vue.use(Col)
 Vue.prototype.$message = Message
