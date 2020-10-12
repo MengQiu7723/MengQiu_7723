@@ -14,6 +14,33 @@
           </el-input>
         </el-col>
       </el-row>
+<!--订单列表数据-->
+      <el-table :data="orderlist" border stripe>
+        <el-table-column type="index"></el-table-column>
+        <el-table-column label="订单编号" :prop="order_number">
+        </el-table-column>
+        <el-table-column label="订单价格" prop="order_price"> </el-table-column>
+        <el-table-column label="是否付款" prop="pay_status"> </el-table-column>
+        <el-table-column label="是否发货" prop="is_send"> </el-table-column>
+        <el-table-column label="下单时间" prop="create_time"> </el-table-column>
+        <el-table-column label="操作">
+          <template >
+            <el-button type="primary" icon="el-icon-edit"></el-button>
+            <el-button type="primary" icon="el-icon-location"></el-button>
+          </template>
+        </el-table-column>
+      </el-table>
+
+      <!--分页-->
+       <el-pagination
+      @size-change="handleSizeChange"
+      @current-change="handleCurrentChange"
+      :current-page="queryInfo.pagenum"
+      :page-sizes="[5, 10, 15]"
+      :page-size="queryInfo.pagesize"
+      layout="total, sizes, prev, pager, next, jumper"
+      :total="total">
+    </el-pagination>
     </el-card>
   </div>
 </template>
@@ -27,9 +54,11 @@ export default {
         pagenum: 1,
         pagesize: 10,
       },
-      total:0,
-      orderList:[]
-    }
+      total: 0,
+      orderList: [{
+        order_number:55555
+      }],
+    };
   },
   created() {
     this.getOrderList();
@@ -43,12 +72,20 @@ export default {
       if (res.meta.status !== 200) {
         return this.$message.error("获取订单列表失败! ");
       }
-      console.log(res)
-      this.total = res.data.total
-      this.orderList = res.data.goods
-    }
+      console.log(res);
+      this.total = res.data.total;
+      this.orderList = res.data.goods;
+    },
+  },
+  handleSizeChange(newSize){
+    this.queryInfo.pagesize = newSize
+    this.getOrderList()
+  },
+  handleCurrentChange(newPage){
+    this.queryInfo.pagenum = newPage
+    this.getOrderList()
   }
-}
+};
 </script>
 
 <style lang="less" scoped>
