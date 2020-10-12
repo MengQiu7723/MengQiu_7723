@@ -1,11 +1,17 @@
 <template>
   <div>
-    <h3>商品组件</h3>
+    <el-input v-model="input" placeholder="请输入内容"></el-input>
   </div>
 </template>
 
 <script>
-export default {};
+export default {
+  data() {
+    return {
+      input: "",
+    };
+  },
+};
 </script>
 
 <style lang="less" scoped>
