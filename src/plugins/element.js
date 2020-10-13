@@ -19,12 +19,15 @@ import {
   //卡片视图
   Card,
   Col,
-  Table,
   Row,
+  Table,
   TableColumn,
   Pagination,
   Tag,
-  dialog
+  Switch,
+  Tooltip,
+  Dialog,
+  Cascader
 } from 'element-ui'
 
 Vue.use(Button)
@@ -49,7 +52,10 @@ Vue.use(Col)
 Vue.use(TableColumn)
 Vue.use(Pagination)
 Vue.use(Tag)
-Vue.use(dialog)
+Vue.use(Switch)
+Vue.use(Tooltip)
+Vue.use(Dialog)
+Vue.use(Cascader)
 
 Vue.prototype.$message = Message
 
