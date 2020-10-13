@@ -6,10 +6,7 @@
         <!-- <img src="../assets/heima.png" alt=""> -->
         <span>35后台管理系统</span>
       </div>
-      <el-button
-        type="info"
-        @click="logout"
-      >退出</el-button>
+      <el-button type="info" @click="logout">退出</el-button>
     </el-header>
     <!-- 页面主体 -->
     <el-container>
@@ -79,76 +76,74 @@
 
 <script>
 export default {
-  data () {
+  data() {
     return {
       //左侧菜单数据
       menulist: [
         {
           id: 101,
-          authName: "用户管理",
+          authName: '用户管理',
           children: [
-            { id: 111, authName: "用户列表", path: "users" },
-            { id: 112, authName: "[在这里输入名称]", path: "users02" }
-          ]
+            { id: 111, authName: '用户列表', path: 'users' },
+            { id: 112, authName: '[在这里输入名称]', path: 'users02' },
+          ],
         },
         {
           id: 102,
-          authName: "商品管理",
+          authName: '商品管理',
           children: [
-            { id: 122, authName: "商品列表", path: "product" },
-            { id: 123, authName: "--管理", path: "product02" }
-          ]
+            { id: 122, authName: '商品列表', path: 'product' },
+            { id: 123, authName: '--管理', path: 'product02' },
+          ],
         },
         {
           id: 103,
-          authName: "订单管理",
-          children: [
-            { id: 133, authName: "订单列表", path: "order" }
-          ]
+          authName: '订单管理',
+          children: [{ id: 133, authName: '订单列表', path: 'order' }],
         },
         {
           id: 104,
-          authName: "服务管理",
+          authName: '服务管理',
           children: [
-            { id: 144, authName: "公告箮理", path: 'announcement' },
+            { id: 144, authName: '公告箮理', path: 'announcement' },
             { id: 145, authName: '广告管理', path: 'advertising' },
-            { id: 146, authName: '皮肤管理', path: 'skin' }
-          ]
+            { id: 146, authName: '皮肤管理', path: 'skin' },
+          ],
         },
         {
           id: 105,
-          authName: "统计管理",
+          authName: '统计管理',
           children: [
-            { id: 155, authName: "商品销售排行", path: 'rank' },
-            { id: 156, authName: '商品销售图表', path: 'chart' }
-          ]
-        }
+            { id: 155, authName: '商品销售排行', path: 'rank' },
+            { id: 156, authName: '商品销售图表', path: 'chart' },
+          ],
+        },
       ],
       //被激活的链接地址
-      activePath: "",
-    };
+      activePath: '',
+    }
   },
-  created () {
-    this.activePath = window.sessionStorage.getItem("activePath");
+  created() {
+    this.activePath = window.sessionStorage.getItem('activePath')
   },
   methods: {
     //保存链接的激活状态
-    saveNavState (activePath) {
-      window.sessionStorage.setItem("activePath", activePath);
-      this.activePath = activePath;
+    saveNavState(activePath) {
+      window.sessionStorage.setItem('activePath', activePath)
+      this.activePath = activePath
     },
-    logout () {
-      window.sessionStorage.clear();
-      this.$router.push("/login");
+    logout() {
+      window.sessionStorage.clear()
+      this.$router.push('/login')
     },
   },
-  handleOpen (key, keyPath) {
-    console.log(key, keyPath);
+  handleOpen(key, keyPath) {
+    console.log(key, keyPath)
   },
-  handleClose (key, keyPath) {
-    console.log(key, keyPath);
+  handleClose(key, keyPath) {
+    console.log(key, keyPath)
   },
-};
+}
 </script>
 
 <style lang="less" scoped>
