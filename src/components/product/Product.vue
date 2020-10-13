@@ -19,6 +19,13 @@
           <el-button type="success">添加商品</el-button></el-col
         >
       </el-row>
+      <!--列表区域-->
+      <el-table :data="userList">
+        <el-table-column label="商品名称" prop="shopName"></el-table-column>
+        <el-table-column label="商品类型" prop="shop"></el-table-column>
+        <el-table-column label="上架时间" prop="shoptime"></el-table-column>
+        <el-table-column label="价格" prop="money"></el-table-column>
+      </el-table>
     </el-card>
   </div>
 </template>
@@ -27,13 +34,26 @@
 export default {
   data() {
     return {
-      input: "",
+      queryInfo: {
+        query: "",
+        pagenum: 1,
+        pagesize: 2,
+      },
+      userList: [],
+      total: 0,
     };
   },
 
-  created(){
-    this.getGoodsList()
-  }
+  created() {
+    this.getGoodsList();
+  },
+  methods: {
+    async getUserList() {
+      const { data: res } = await this.$http.get("");
+      this.userList = res.data;
+      console.log(res.code);
+    },
+  },
 };
 </script>
 

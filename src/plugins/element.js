@@ -25,7 +25,9 @@ import {
   Pagination,
   Tag,
   Switch,
-  Tooltip
+  Tooltip,
+  Dialog,
+  Cascader
 } from 'element-ui'
 
 Vue.use(Button)
@@ -52,5 +54,8 @@ Vue.use(Pagination)
 Vue.use(Tag)
 Vue.use(Switch)
 Vue.use(Tooltip)
+Vue.use(Dialog)
+Vue.use(Cascader)
+
 Vue.prototype.$message = Message
 
