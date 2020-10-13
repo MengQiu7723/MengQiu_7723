@@ -32,7 +32,7 @@
         </el-table-column>
         <el-table-column label="操作">
           <template >
-            <el-button type="primary" size="mini" icon="el-icon-edit"></el-button>
+            <el-button type="primary" size="mini" icon="el-icon-edit" @click="showBox"></el-button>
             <el-button type="success" size="mini" icon="el-icon-location"></el-button>
           </template>
         </el-table-column>
@@ -49,6 +49,18 @@
       :total="total">
     </el-pagination>
     </el-card>
+
+    <!--地址-->
+<el-dialog
+  title="修改地址"
+  :visible.sync="addressVisible"
+  width="50%">
+  <span>这是一段信息</span>
+  <span slot="footer" class="dialog-footer">
+    <el-button @click="addressVisible = false">取 消</el-button>
+    <el-button type="primary" @click="addressVisible = false">确 定</el-button>
+  </span>
+</el-dialog>
   </div>
 </template>
 
@@ -63,6 +75,7 @@ export default {
       },
       total: 0,
       orderList: [{
+        addressVisible:false,
         order_number:'测试数据',
         order_price:'40',
         is_send:'是',
@@ -95,6 +108,10 @@ export default {
   handleCurrentChange(newPage){
     this.queryInfo.pagenum = newPage
     this.getOrderList()
+  },
+  //修改地址
+  showBox(){
+    this.addressVisible = true
   }
 };
 </script>
