@@ -25,6 +25,9 @@
         <el-table-column label="商品类型" prop="shop"></el-table-column>
         <el-table-column label="上架时间" prop="shoptime"></el-table-column>
         <el-table-column label="价格" prop="money"></el-table-column>
+        <el-table-column label="操作" prop="scope"></el-table-column>
+        <el-button type="primary" icon="el-icon-edit"></el-button>
+        <el-button type="primary" icon="el-icon-delete"></el-button>
       </el-table>
     </el-card>
   </div>
