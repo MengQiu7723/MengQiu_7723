@@ -21,7 +21,9 @@
           </el-input>
         </el-col>
         <el-col :span="4">
-          <el-button type="primary">添加用户</el-button>
+          <el-button type="primary" @click="addDialogVisible = true"
+            >添加用户</el-button
+          >
         </el-col>
       </el-row>
 
@@ -91,6 +93,22 @@
       >
       </el-pagination>
     </el-card>
+
+    <!-- 添加用户的对话框 -->
+    <el-dialog
+      title="提示"
+      :visible.sync="addDialogVisible"
+      width="50%"
+      :before-close="handleClose"
+    >
+      <span>这是一段信息</span>
+      <span slot="footer" class="dialog-footer">
+        <el-button @click="addDialogVisible = false">取 消</el-button>
+        <el-button type="primary" @click="addDialogVisible = false"
+          >确 定</el-button
+        >
+      </span>
+    </el-dialog>
   </div>
 </template>
 
@@ -108,7 +126,10 @@ export default {
       },
       //获取的用户列表
       userList: [],
+      //数据总数
       total: 0,
+      //控制对话框的显示与隐藏
+      addDialogVisible: false,
     }
   },
   created() {
