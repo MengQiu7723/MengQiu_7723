@@ -19,16 +19,52 @@
           <el-button type="success">添加商品</el-button></el-col
         >
       </el-row>
-      <!--列表区域-->
-      <el-table :data="userList">
+      <!--商品列表区域-->
+      <el-table :data="userList" border stripe>
         <el-table-column label="商品名称" prop="shopName"></el-table-column>
         <el-table-column label="商品类型" prop="shop"></el-table-column>
         <el-table-column label="上架时间" prop="shoptime"></el-table-column>
         <el-table-column label="价格" prop="money"></el-table-column>
-        <el-table-column label="操作" prop="scope"></el-table-column>
-        <el-button type="primary" icon="el-icon-edit"></el-button>
-        <el-button type="primary" icon="el-icon-delete"></el-button>
+        <el-table-column label="操作">
+          <template>
+            <el-button
+              type="primary"
+              icon="el-icon-edit"
+              size="mini"
+            ></el-button>
+            <el-button
+              type="danger"
+              icon="el-icon-delete"
+              size="mini"
+            ></el-button>
+
+            <el-tooltip
+              effect="dark"
+              content="分配用户"
+              placement="top"
+              :enterable="false"
+            >
+              <el-button
+                type="warning"
+                icon="el-icon-setting"
+                size="mini"
+              ></el-button>
+            </el-tooltip>
+          </template>
+        </el-table-column>
       </el-table>
+
+      <!-- 分页区域 -->
+      <el-pagination
+        @size-change="handleSizeChange"
+        @current-change="handleCurrentChange"
+        :current-page="queryInfo.pagenum"
+        :page-sizes="[1, 2, 5, 10]"
+        :page-size="queryInfo.pagesize"
+        layout="total, sizes, prev, pager, next, jumper"
+        :total="total"
+      >
+      </el-pagination>
     </el-card>
   </div>
 </template>
@@ -42,8 +78,15 @@ export default {
         pagenum: 1,
         pagesize: 2,
       },
-      userList: [],
       total: 0,
+      userList: [
+        {
+          shopName: "饼干",
+          shop: "零食",
+          shoptime: "2020.1.23",
+          money: "9.9",
+        },
+      ],
     };
   },
 
@@ -52,7 +95,7 @@ export default {
   },
   methods: {
     async getUserList() {
-      const { data: res } = await this.$http.get("");
+      const { data: res } = await this.$http.get("/book/findAll ");
       this.userList = res.data;
       console.log(res.code);
     },
