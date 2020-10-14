@@ -16,17 +16,29 @@
             <el-button
               slot="append"
               icon="el-icon-search"
-              @click="getUserList"
+              @click="getUserList()"
             ></el-button>
           </el-input>
         </el-col>
         <el-col :span="4">
-          <el-button type="primary">添加用户</el-button>
+          <el-button type="primary" @click="addDialogVisible = true"
+            >添加用户</el-button
+          >
         </el-col>
       </el-row>
 
       <!-- 用户列表区域 -->
-      <el-table :data="userList" border stripe>
+      <el-table
+        :data="
+          userList.slice(
+            (queryInfo.pagenum - 1) * queryInfo.pagesize,
+            queryInfo.pagenum * queryInfo.pagesize
+          )
+        "
+        border
+        stripe
+      >
+        <!--  -->
         <el-table-column type="index"></el-table-column>
         <el-table-column label="姓名" prop="userName"></el-table-column>
         <el-table-column label="邮箱" prop="email"></el-table-column>
@@ -81,6 +93,22 @@
       >
       </el-pagination>
     </el-card>
+
+    <!-- 添加用户的对话框 -->
+    <el-dialog
+      title="提示"
+      :visible.sync="addDialogVisible"
+      width="50%"
+      :before-close="handleClose"
+    >
+      <span>这是一段信息</span>
+      <span slot="footer" class="dialog-footer">
+        <el-button @click="addDialogVisible = false">取 消</el-button>
+        <el-button type="primary" @click="addDialogVisible = false"
+          >确 定</el-button
+        >
+      </span>
+    </el-dialog>
   </div>
 </template>
 
@@ -88,17 +116,33 @@
 export default {
   data() {
     return {
-      //手工数据
+      // 获取用户列表的参数对象
       queryInfo: {
         query: '',
-        //当前页数
+        // 当前的页数
         pagenum: 1,
-        //当前每页显示多少条数据
-        pagesize: 2,
+        // 当前每页显示多少条数据
+        pagesize: 1,
       },
-      total: 0,
       //获取的用户列表
-      userList: [
+      userList: [],
+      //数据总数
+      total: 0,
+      //控制对话框的显示与隐藏
+      addDialogVisible: false,
+    }
+  },
+  created() {
+    this.getUserList()
+  },
+  methods: {
+    async getUserList() {
+      // 发送请求
+      // const { data: res } = await this.$http.get('/api/book/findAll')
+      // if (res.code !== 2) {
+      //   return this.$message.error('获取用户列表失败！')
+      // }
+      const res = [
         {
           userName: 'admin',
           email: '20201013@gzs.com',
@@ -113,37 +157,23 @@ export default {
           role_name: '炒蛋管理员',
           mg_state: false,
         },
-      ],
-    }
-  },
-  created() {
-    this.getUserList()
-    this.total = this.userList.length
-  },
-  methods: {
-    async getUserList() {
-      // 发送请求
-      const { data: res } = await this.$http.get('/api/book/findAll')
-      var result = res.data;
-      console.log(result.data);
-
-      // if (res.meta.status !== 200) {
-      //   return this.$message.error('获取用户列表失败！')
-      // } else {}
-      this.userList = res.data
+      ]
+      this.userList = res
+      // this.userList = res.data
       this.total = this.userList.length
-      console.log(res.code)
     },
-    //监听 pagesize 改变的事件
+    // 监听 pagesize 改变的事件
     handleSizeChange(newSize) {
+      console.log(newSize + '条/页')
       this.queryInfo.pagesize = newSize
-      this.getUserList()
+      this.queryInfo.pagenum = 1
     },
-    //监听 页码值 改变的事件
+    // 监听 页码值 改变的事件
     handleCurrentChange(newPage) {
+      console.log('第' + newPage + '页')
       this.queryInfo.pagenum = newPage
-      this.getUserList()
     },
+    // 监听 switch 开关状态的改变
     userStateChange(userinfo) {
       console.log(userinfo)
       // const {data:res} = await this.$http.put('/api/')
