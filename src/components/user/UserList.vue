@@ -7,14 +7,14 @@
         tableData.slice((currentPage - 1) * PageSize, currentPage * PageSize)
       "
       style="width: 100%"
+      border
+      stripe
     >
-      <el-table-column prop="mobile" label="日期" width="180"></el-table-column>
-      <el-table-column
-        prop="userName"
-        label="姓名"
-        width="180"
-      ></el-table-column>
-      <el-table-column prop="role_name" label="地址"></el-table-column>
+      <el-table-column type="index"></el-table-column>
+      <el-table-column label="姓名" prop="userName"></el-table-column>
+      <el-table-column label="邮箱" prop="email"></el-table-column>
+      <el-table-column label="手机" prop="mobile"></el-table-column>
+      <el-table-column label="身份" prop="role_name"></el-table-column>
     </el-table>
     <div class="tabListPage">
       <el-pagination
@@ -41,14 +41,56 @@ export default {
       // 总条数，根据接口获取数据长度(注意：这里不能为空)
       totalCount: 1,
       // 个数选择器（可修改）
-      pageSizes: [1, 2, 3, 4],
+      pageSizes: [1, 2, 5, 10],
       // 默认每页显示的条数（可修改）
-      PageSize: 1,
+      PageSize: 5,
     }
   },
   methods: {
     getData() {
       const res = [
+        {
+          userName: 'admin',
+          email: '20201013@gzs.com',
+          mobile: '202010131036',
+          role_name: '炒鸡管理员',
+          mg_state: true,
+        },
+        {
+          userName: 'tony',
+          email: '20201013@gzs.com',
+          mobile: '202010131036',
+          role_name: '炒蛋管理员',
+          mg_state: false,
+        },
+        {
+          userName: 'admin',
+          email: '20201013@gzs.com',
+          mobile: '202010131036',
+          role_name: '炒鸡管理员',
+          mg_state: true,
+        },
+        {
+          userName: 'tony',
+          email: '20201013@gzs.com',
+          mobile: '202010131036',
+          role_name: '炒蛋管理员',
+          mg_state: false,
+        },
+        {
+          userName: 'admin',
+          email: '20201013@gzs.com',
+          mobile: '202010131036',
+          role_name: '炒鸡管理员',
+          mg_state: true,
+        },
+        {
+          userName: 'tony',
+          email: '20201013@gzs.com',
+          mobile: '202010131036',
+          role_name: '炒蛋管理员',
+          mg_state: false,
+        },
         {
           userName: 'admin',
           email: '20201013@gzs.com',

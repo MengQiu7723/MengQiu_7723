@@ -84,8 +84,9 @@ export default {
           id: 101,
           authName: '用户管理',
           children: [
-            { id: 111, authName: '用户列表', path: 'users' },
-            { id: 112, authName: '[在这里输入名称]', path: 'users02' },
+            { id: 111, authName: '管理员列表', path: 'adminusers' },
+            { id: 112, authName: '用户列表', path: 'userlist' },
+            { id: 113, authName: '商家列表', path: 'businessmanList' },
           ],
         },
         {

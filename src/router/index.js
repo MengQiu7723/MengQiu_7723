@@ -4,8 +4,9 @@ import Login from '../components/Login.vue'
 import Home from '../components/Home.vue'
 import Welcome from '../components/Welcome.vue'
 
-import Users from '../components/user/Users.vue'
-import Users02 from '../components/user/Users02.vue'
+import AdminUsers from '../components/user/AdminUsers.vue'
+import UserList from '../components/user/UserList.vue'
+import BusinessmanList from '../components/user/BusinessmanList.vue'
 
 import Product from '../components/product/Product.vue'
 import Product02 from '../components/product/Product02.vue'
@@ -32,8 +33,9 @@ const router = new Router({
       path: '/home', component: Home, redirect: '/welcome',
       children: [
         { path: '/welcome', component: Welcome },
-        { path: '/users', component: Users },
-        { path: '/users02', component: Users02 },
+        { path: '/adminusers', component: AdminUsers },
+        { path: '/userlist', component: UserList },
+        { path: '/businessmanList', component: BusinessmanList },
         { path: '/product', component: Product },
         { path: '/product02', component: Product02 },
         { path: '/order', component: Order },
