@@ -27,8 +27,12 @@ import {
   Switch,
   Tooltip,
   Dialog,
-  Cascader
+  Cascader,
+  Timeline,
+  TimelineItem
 } from 'element-ui'
+
+
 
 Vue.use(Button)
 Vue.use(Form)
@@ -56,6 +60,7 @@ Vue.use(Switch)
 Vue.use(Tooltip)
 Vue.use(Dialog)
 Vue.use(Cascader)
-
+Vue.use(Timeline)
+Vue.use(TimelineItem)
 Vue.prototype.$message = Message
 
