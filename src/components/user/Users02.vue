@@ -1,5 +1,6 @@
 <template>
   <div class="app">
+    <p>前端分页demo</p>
     <!-- 将获取到的数据进行计算 -->
     <el-table
       :data="
