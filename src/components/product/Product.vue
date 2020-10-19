@@ -95,7 +95,7 @@ export default {
   },
   methods: {
     async getUserList() {
-      const { data: res } = await this.$http.get("/book/findAll ");
+      const { data: res } = await this.$http.get("/api/book/findAll ");
       this.userList = res.data;
       console.log(res.code);
     },
