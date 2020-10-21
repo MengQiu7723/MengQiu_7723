@@ -5,8 +5,8 @@ import router from './router'
 import axios from 'axios'
 import './plugins/element.js'
 // 原来的引用路径
-// import 'element-ui/lib/theme-chalk/index.css'
-import './element-variables.scss'
+import 'element-ui/lib/theme-chalk/index.css'
+// import './element-variables.scss'
 
 // 导入全局样式表
 import './assets/css/global.css'
