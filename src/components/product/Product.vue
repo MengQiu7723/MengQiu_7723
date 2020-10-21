@@ -21,9 +21,9 @@
       </el-row>
       <!--商品列表区域-->
       <el-table :data="userList" border stripe>
-        <el-table-column label="商品名称" prop="shopName"></el-table-column>
-        <el-table-column label="商品类型" prop="shop"></el-table-column>
-        <el-table-column label="上架时间" prop="shoptime"></el-table-column>
+        <el-table-column label="书本名称" prop="bookName"></el-table-column>
+        <el-table-column label="书本类型" prop="booktype"></el-table-column>
+        <el-table-column label="上架时间" prop="booktime"></el-table-column>
         <el-table-column label="价格" prop="money"></el-table-column>
         <el-table-column label="操作">
           <template>
@@ -81,9 +81,9 @@ export default {
       total: 0,
       userList: [
         {
-          shopName: "饼干",
-          shop: "零食",
-          shoptime: "2020.1.23",
+          bookName: "唐诗三百首",
+          booktype: "文学",
+          booktime: "2020.1.23",
           money: "9.9",
         },
       ],
