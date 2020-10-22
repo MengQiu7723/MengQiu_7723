@@ -14,7 +14,7 @@ import './assets/css/global.css'
 Vue.config.productionTip = false
 
 // 配置请求的根路径
-// axios.defaults.baseURL = 'http://192.168.1.103:8080'
+axios.defaults.baseURL = '/api/'
 
 // 配置axios请求拦截器
 axios.interceptors.request.use((config) => {
