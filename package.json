@@ -13,6 +13,7 @@
     "element-theme": "^2.0.1",
     "element-ui": "^2.13.2",
     "vue": "^2.6.11",
+    "vue-quill-editor": "^3.0.6",
     "vue-router": "^3.2.0"
   },
   "devDependencies": {
@@ -49,7 +50,8 @@
       "parser": "babel-eslint"
     },
     "rules": {
-      "no-dupe-keys": 2
+      "no-dupe-keys": 2,
+      "vue/no-dupe-keys": "off"
     }
   },
   "browserslist": [

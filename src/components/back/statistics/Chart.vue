@@ -14,7 +14,7 @@
 </template>
 
 <script>
-// import echarts from 'echarts'
+ import echarts from 'echarts'
 
 export default {
   data() {
@@ -23,7 +23,7 @@ export default {
   created() {},
   async mounted() {
     // 基于准备好的dom，初始化echarts实例
-    var myChart = echarts.init(document.getElementById('main'))
+     var myChart = echarts.init(document.getElementById('main'))
 
     //获取接口
     // const {data:res} = await this.$http.get('')

@@ -117,7 +117,8 @@
 </template>
 
 <script>
-import cityData from "./citydata";
+import cityData from "./citydata"
+
 
 export default {
   data() {
