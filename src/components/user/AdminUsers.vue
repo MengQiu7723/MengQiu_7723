@@ -93,6 +93,7 @@
         :current-page="queryInfo.pagenum"
         :page-sizes="[1, 2, 5, 10]"
         :page-size="queryInfo.pagesize"
+        
         layout="total, sizes, prev, pager, next, jumper"
         :total="total"
       >
@@ -104,7 +105,7 @@
       title="添加用户"
       :visible.sync="addDialogVisible"
       width="50%"
-      :before-close="handleClose"
+      @close="addDialogClosed"
     >
       <!-- 主容主体信息 -->
       <el-form
@@ -129,9 +130,7 @@
       <!-- 底部区域 -->
       <span slot="footer" class="dialog-footer">
         <el-button @click="addDialogVisible = false">取 消</el-button>
-        <el-button type="primary" @click="addDialogVisible = false"
-          >确 定</el-button
-        >
+        <el-button type="primary" @click="addUser">确 定</el-button>
       </span>
     </el-dialog>
 
@@ -280,6 +279,7 @@ export default {
       // }
       const res = [
         {
+          id: 1,
           userName: 'admin',
           email: '20201013@gzs.com',
           mobile: '202010131036',
@@ -287,6 +287,7 @@ export default {
           mg_state: true,
         },
         {
+          id: 2,
           userName: 'tony',
           email: '20201013@gzs.com',
           mobile: '202010131036',
@@ -303,11 +304,13 @@ export default {
       console.log(newSize + '条/页')
       this.queryInfo.pagesize = newSize
       this.queryInfo.pagenum = 1
+      this.getUserList()
     },
     // 监听 页码值 改变的事件
     handleCurrentChange(newPage) {
       console.log('第' + newPage + '页')
       this.queryInfo.pagenum = newPage
+      this.getUserList()
     },
     // 监听 switch 开关状态的改变
     async userStateChange(userinfo) {
@@ -346,7 +349,7 @@ export default {
       // console.log(id)
       const { data: res } = await this.$http.get('users/' + id)
 
-      if (res.code !== 200) {
+      if (res.code !== 2) {
         return this.$message.error('查询用户信息失败！')
       }
 
