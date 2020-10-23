@@ -4,7 +4,7 @@
     <el-breadcrumb separator-class="el-icon-arrow-right">
       <el-breadcrumb-item :to="{ path: '/home' }">首页</el-breadcrumb-item>
       <el-breadcrumb-item>用户管理</el-breadcrumb-item>
-      <el-breadcrumb-item>用户列表</el-breadcrumb-item>
+      <el-breadcrumb-item>管理员列表</el-breadcrumb-item>
     </el-breadcrumb>
 
     <!-- 卡片视图区域 -->
@@ -93,7 +93,6 @@
         :current-page="queryInfo.pagenum"
         :page-sizes="[1, 2, 5, 10]"
         :page-size="queryInfo.pagesize"
-        
         layout="total, sizes, prev, pager, next, jumper"
         :total="total"
       >
@@ -273,30 +272,30 @@ export default {
   methods: {
     async getUserList() {
       // 发送请求
-      // const { data: res } = await this.$http.get('/api/book/findAll')
-      // if (res.code !== 2) {
-      //   return this.$message.error('获取用户列表失败！')
-      // }
-      const res = [
-        {
-          id: 1,
-          userName: 'admin',
-          email: '20201013@gzs.com',
-          mobile: '202010131036',
-          role_name: '炒鸡管理员',
-          mg_state: true,
-        },
-        {
-          id: 2,
-          userName: 'tony',
-          email: '20201013@gzs.com',
-          mobile: '202010131036',
-          role_name: '炒蛋管理员',
-          mg_state: false,
-        },
-      ]
-      this.userList = res
-      // this.userList = res.data
+      const { data: res } = await this.$http.get('/api/book/findAll')
+      if (res.code !== 2) {
+        return this.$message.error('获取用户列表失败！')
+      }
+      // const res = [
+      //   {
+      //     id: 1,
+      //     userName: 'admin',
+      //     email: '20201013@gzs.com',
+      //     mobile: '202010131036',
+      //     role_name: '炒鸡管理员',
+      //     mg_state: true,
+      //   },
+      //   {
+      //     id: 2,
+      //     userName: 'tony',
+      //     email: '20201013@gzs.com',
+      //     mobile: '202010131036',
+      //     role_name: '炒蛋管理员',
+      //     mg_state: false,
+      //   },
+      // ]
+      // this.userList = res
+      this.userList = res.data
       this.total = this.userList.length
     },
     // 监听 pagesize 改变的事件
@@ -331,12 +330,13 @@ export default {
       this.$refs.addFormRef.validate(async (valid) => {
         if (!valid) return
         // 可以发起添加用户的网络请求
-        const { data: res } = await this.$http.post('users', this.addForm)
-
-        if (res.code !== 2) {
+        const { data: res } = await this.$http.post(
+          '/api/user/regist',
+          this.addForm
+        )
+        if (res.code !== 0) {
           this.$message.error('添加用户失败！')
         }
-
         this.$message.success('添加用户成功！')
         // 隐藏添加用户的对话框
         this.addDialogVisible = false
@@ -347,12 +347,10 @@ export default {
     // 展示编辑用户的对话框
     async showEditDialog(id) {
       // console.log(id)
-      const { data: res } = await this.$http.get('users/' + id)
-
-      if (res.code !== 2) {
+      const { data: res } = await this.$http.get('/api/user/getById' + id)
+      if (res.code !== 0) {
         return this.$message.error('查询用户信息失败！')
       }
-
       this.editForm = res.data
       this.editDialogVisible = true
     },
@@ -365,14 +363,13 @@ export default {
       this.$refs.editFormRef.validate(async (valid) => {
         if (!valid) return
         // 发起修改用户信息的数据请求
-        const { data: res } = await this.$http.put(
-          'users/' + this.editForm.id,
+        const { data: res } = await this.$http.post(
+          '/api/user/update' + this.editForm.id,
           {
             email: this.editForm.email,
             mobile: this.editForm.mobile,
           }
         )
-
         if (res.code !== 2) {
           return this.$message.error('更新用户信息失败！')
         }

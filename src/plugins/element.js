@@ -30,8 +30,14 @@ import {
   Cascader,
   Timeline,
   TimelineItem,
+<<<<<<< HEAD
   Upload,
   Select
+=======
+  Step,
+  Steps,
+  Tree
+>>>>>>> 3e1dd57f022976db9bc33e7ddaa78aeab5c6d4e2
 } from 'element-ui'
 
 
@@ -64,7 +70,13 @@ Vue.use(Dialog)
 Vue.use(Cascader)
 Vue.use(Timeline)
 Vue.use(TimelineItem)
+<<<<<<< HEAD
 Vue.use(Upload)
 Vue.use(Select)
+=======
+Vue.use(Step)
+Vue.use(Steps)
+Vue.use(Tree)
+>>>>>>> 3e1dd57f022976db9bc33e7ddaa78aeab5c6d4e2
 Vue.prototype.$message = Message
 
