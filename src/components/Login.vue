@@ -45,7 +45,7 @@ export default {
       // 这是登录表单的数据绑定对象
       loginForm: {
         username: 'admin',
-        password: '123456',
+        password: '123',
       },
       // 这是表单的验证规则对象
       loginFormRules: {
@@ -83,13 +83,13 @@ export default {
       this.$refs.loginFormRef.validate(async (valid) => {
         if (!valid) return
 
-        if (
-          this.loginForm.username == 'admin' &&
-          this.loginForm.password == 123456
-        ) {
-          this.$message.success('登录成功')
-          this.$router.push('/home')
-        } else {
+        // if (
+        //   this.loginForm.username == 'admin' &&
+        //   this.loginForm.password == 123456
+        // ) {
+        //   this.$message.success('登录成功')
+        //   this.$router.push('/home')
+        // } else {
           //get请求
           const res = await this.$http.get('user/login', {
             params: this.loginForm,
@@ -110,7 +110,7 @@ export default {
           }
           console.log(res)
           //get请求
-        }
+        // }
       })
     },
   },
