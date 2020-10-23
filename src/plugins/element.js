@@ -31,7 +31,8 @@ import {
   Timeline,
   TimelineItem,
   Step,
-  Steps
+  Steps,
+  Tree
 } from 'element-ui'
 
 
@@ -66,5 +67,6 @@ Vue.use(Timeline)
 Vue.use(TimelineItem)
 Vue.use(Step)
 Vue.use(Steps)
+Vue.use(Tree)
 Vue.prototype.$message = Message
 

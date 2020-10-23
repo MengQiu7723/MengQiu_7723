@@ -19,37 +19,37 @@ export default {
   data() {
       return {
         data: [{
-          label: '一级 1',
+          label: '中国文学',
           children: [{
-            label: '二级 1-1',
+            label: '中国古典文学',
             children: [{
-              label: '三级 1-1-1'
+              label: '唐诗三百首'
             }]
           }]
         }, {
-          label: '一级 2',
+          label: '外国文学',
           children: [{
-            label: '二级 2-1',
+            label: '外国现代文学',
             children: [{
-              label: '三级 2-1-1'
+              label: '钢铁是怎样炼成的'
             }]
           }, {
-            label: '二级 2-2',
+            label: '外国古典文学',
             children: [{
-              label: '三级 2-2-1'
+              label: '荷马史诗'
             }]
           }]
         }, {
-          label: '一级 3',
+          label: '儿童文学',
           children: [{
-            label: '二级 3-1',
+            label: '益智书籍',
             children: [{
-              label: '三级 3-1-1'
+              label: '如何走出迷宫'
             }]
           }, {
-            label: '二级 3-2',
+            label: '启示书籍',
             children: [{
-              label: '三级 3-2-1'
+              label: '名人故事'
             }]
           }]
         }],
