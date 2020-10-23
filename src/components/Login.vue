@@ -44,57 +44,57 @@ export default {
     return {
       // 这是登录表单的数据绑定对象
       loginForm: {
-        username: 'admin',
-        password: '123456',
+        username: "admin",
+        password: "123456",
       },
       // 这是表单的验证规则对象
       loginFormRules: {
         // 验证用户名是否合法
         username: [
-          { required: true, message: '请输入登录名称', trigger: 'blur' },
+          { required: true, message: "请输入登录名称", trigger: "blur" },
           {
             min: 3,
             max: 10,
-            message: '长度在 3 到 10 个字符',
-            trigger: 'blur',
+            message: "长度在 3 到 10 个字符",
+            trigger: "blur",
           },
         ],
         // 验证密码是否合法
         password: [
-          { required: true, message: '请输入登录密码', trigger: 'blur' },
+          { required: true, message: "请输入登录密码", trigger: "blur" },
           {
             min: 3,
             max: 15,
-            message: '长度在 3 到 15 个字符',
-            trigger: 'blur',
+            message: "长度在 3 到 15 个字符",
+            trigger: "blur",
           },
         ],
       },
-    }
+    };
   },
   methods: {
     // 点击重置按钮，重置登录表单
     resetLoginForm() {
       // console.log(this);
-      this.$refs.loginFormRef.resetFields()
+      this.$refs.loginFormRef.resetFields();
     },
     //登录按钮事件
     login() {
       this.$refs.loginFormRef.validate(async (valid) => {
-        if (!valid) return
+        if (!valid) return;
 
         if (
-          this.loginForm.username == 'admin' &&
+          this.loginForm.username == "admin" &&
           this.loginForm.password == 123456
         ) {
-          this.$message.success('登录成功')
-          this.$router.push('/home')
+          this.$message.success("登录成功");
+          this.$router.push("/home");
         } else {
           //get请求
           const res = await this.$http.get('user/login', {
             params: this.loginForm,
-          })
-          var result = res.data
+          });
+          var result = res.data;
           if (result.code == 0) {
             //登录成功状态码，这个是后端定义的
             // 1. 将登录成功之后的 token，保存到客户端的 sessionStorage 中
@@ -103,18 +103,18 @@ export default {
             // window.sessionStorage.setItem("token", res.data.token);
             // 2. 通过编程式导航跳转到后台主页，路由地址是 /home
             // this.$router.push("/home");
-            this.$message.success('登录成功')
-            this.$router.push('/home')
+            this.$message.success("登录成功");
+            this.$router.push("/home");
           } else if (result.code == 1) {
-            this.$message.error(result.msg + '，登录失败！')
+            this.$message.error(result.msg + "，登录失败！");
           }
-          console.log(res)
+          console.log(res);
           //get请求
         }
-      })
+      });
     },
   },
-}
+};
 </script>
 
 <style lang="less" scoped>
