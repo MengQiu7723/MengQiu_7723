@@ -29,7 +29,9 @@ import {
   Dialog,
   Cascader,
   Timeline,
-  TimelineItem
+  TimelineItem,
+  Upload,
+  Select
 } from 'element-ui'
 
 
@@ -62,5 +64,7 @@ Vue.use(Dialog)
 Vue.use(Cascader)
 Vue.use(Timeline)
 Vue.use(TimelineItem)
+Vue.use(Upload)
+Vue.use(Select)
 Vue.prototype.$message = Message
 

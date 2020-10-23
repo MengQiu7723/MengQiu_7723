@@ -24,7 +24,7 @@
     v-model="input4">
   </el-input>
     <el-card style="height: 610px;">
-      <quill-editor v-model="content" ref="myQuillEditor" style="height: 500px;" :options="editorOption">
+      <quill-editor v-model="content" ref="myQuillEditor" style="height: 700px;" :options="editorOption">
       <div id="toolbar" slot="toolbar">
         <!--添加按钮-->
         <button class="ql-bold" title="加粗">Bold</button>
@@ -64,17 +64,28 @@
            <option value="FangSong">仿宋</option>
            <option value="Arial">Arial</option>
          </select>
-         <!--添加上下面按钮-->
-         <select class="ql-color" value="color" title="字体颜色"></select>
-         <select class="ql-background" value="background" title="背景颜色"></select>
-         <select class="ql-align" value="align" title="对齐"></select>
-         <button class="ql-clean"  title="还原"></button>
-         <el-row>
-           <el-button type="success" round>成功按钮</el-button>
+         <!--图片上传辅助-->
+         <el-upload
+         class="avater-uploader"
+         :action="serverUrl"
+         name="img"
+         :headers="header"
+         :show-file-list="false"
+         :on-success="uploadSuccess"
+         :on-error="uploadError"
+         :before-upload="beforeUpload">
+         <el-row v-loading="uillUpdateImg">
+           
+    <quill-editor
+            v-model="detailContent"
+            ref="myQuillEditor"
+            :options="editorOption"
+            @change="onEditorChange($event)"
+            @ready="onEditorReady($event)"
+    >
+    </quill-editor>
          </el-row>
-         <el-row>
-           <el-button type="success" icon="el-icon-check" circle></el-button>
-         </el-row>
+         </el-upload>
       </div>
       </quill-editor>
     </el-card>
@@ -117,18 +128,38 @@
         input3:'',
         input4:'',
         content: null,
+                // quillUpdateImg:false,
+        // 根据图片上传状态来确定是否显示loading动画，刚开始是false,不显示
+        // serverUrl:'',//上传图片服务器地址
+        // header:{token:sessionStorage.token},//请求需要token参数，写这里
         editorOption: {
           placeholder:"请输入",
           theme:"snow", //或者‘bubble'
           modules:{
             toolbar:{
-              container:'#toolbar'
+              container:'#toolbar',//工具栏
+              // handlers:{
+                // 'image':function (value) {
+                  // if (value) {
+                    // document.querySelector('#quill-upload input').click()
+                  // }else {
+                    // this.quill.format('image',false);
+                  }
+                }
+              }
             }
           }
-        }
-      }
-    }
-  }
+          // methods:{
+            // beforeUpload(res,file) {},
+            //上传前
+            // uploadSuccess(res,file){},
+            //上传ok
+            // uploadError(res,file){}
+            //上传失败
+          }
+        // }
+      // }
+    // }
 
 </script>
 

@@ -4,6 +4,10 @@ import App from './App.vue'
 import router from './router'
 import axios from 'axios'
 import './plugins/element.js'
+import VueQuillEditor from 'vue-quill-editor'
+import 'quill/dist/quill.core.css'
+import 'quill/dist/quill.snow.css'
+import 'quill/dist/quill.bubble.css'
 // 原来的引用路径
 import 'element-ui/lib/theme-chalk/index.css'
 // import './element-variables.scss'
@@ -12,6 +16,7 @@ import 'element-ui/lib/theme-chalk/index.css'
 import './assets/css/global.css'
 
 Vue.config.productionTip = false
+Vue.use(VueQuillEditor);
 
 // 配置请求的根路径
 axios.defaults.baseURL = '/api/'
