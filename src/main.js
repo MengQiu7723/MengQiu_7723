@@ -18,7 +18,11 @@ import 'quill/dist/quill.bubble.css'
 // 导入全局样式表
 import './assets/css/global.css'
 
+//导入Container组件
+
+
 Vue.config.productionTip = false
+Vue.use(VueQuillEditor);
 
 // 配置请求的根路径
 axios.defaults.baseURL = '/api/'
