@@ -29,7 +29,9 @@ import {
   Dialog,
   Cascader,
   Timeline,
-  TimelineItem
+  TimelineItem,
+  Step,
+  Steps
 } from 'element-ui'
 
 
@@ -62,5 +64,7 @@ Vue.use(Dialog)
 Vue.use(Cascader)
 Vue.use(Timeline)
 Vue.use(TimelineItem)
+Vue.use(Step)
+Vue.use(Steps)
 Vue.prototype.$message = Message
 

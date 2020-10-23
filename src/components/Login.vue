@@ -91,7 +91,7 @@ export default {
           this.$router.push("/home");
         } else {
           //get请求
-          const res = await this.$http.get("user/login", {
+          const res = await this.$http.get('user/login', {
             params: this.loginForm,
           });
           var result = res.data;
