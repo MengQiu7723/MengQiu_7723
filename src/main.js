@@ -27,11 +27,11 @@ axios.defaults.baseURL = '/api/'
 Vue.use(VueQuillEditor)
 
 // 配置axios请求拦截器
-// axios.interceptors.request.use((config) => {
-//   // console.log(config)
-//   config.headers.Authorization = window.sessionStorage.getItem('token');
-//   return config
-// });
+axios.interceptors.request.use((config) => {
+  // console.log(config)
+  config.headers.Authorization = window.sessionStorage.getItem('token');
+  return config
+});
 Vue.prototype.$http = axios
 
 new Vue({

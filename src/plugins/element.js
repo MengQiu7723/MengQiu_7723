@@ -5,6 +5,7 @@ import {
   FormItem,
   Input,
   Message,
+  MessageBox,
   Container,
   Header,
   Aside,
@@ -67,4 +68,5 @@ Vue.use(TimelineItem)
 Vue.use(Step)
 Vue.use(Steps)
 Vue.prototype.$message = Message
+Vue.prototype.$confirm = MessageBox.confirm
 
