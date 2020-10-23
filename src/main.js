@@ -11,6 +11,9 @@ import 'element-ui/lib/theme-chalk/index.css'
 // 导入全局样式表
 import './assets/css/global.css'
 
+//导入Container组件
+
+
 Vue.config.productionTip = false
 
 // 配置请求的根路径
