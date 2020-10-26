@@ -15,6 +15,9 @@ import 'quill/dist/quill.core.css'
 import 'quill/dist/quill.snow.css'
 import 'quill/dist/quill.bubble.css'
 
+import Editor from './components/back/service/Editor'
+Vue.component("Editor",Editor)
+
 // 导入全局样式表
 import './assets/css/global.css'
 
