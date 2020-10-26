@@ -52,6 +52,7 @@
       </el-form-item>
       <el-form-item label="文章简介" prop="summary">
         <el-input type="textarea" rows="5" v-model="artData.summary"></el-input>
+        
       </el-form-item>
     </el-form>
     <quill-editor
@@ -82,8 +83,18 @@
         @blur="onEditorBlur($event)"
         @focus="onEditorFocus($event)"
         @change="onEditorChange($event)"
-      ></quill-editor>
+      >
+      </quill-editor>
     </quill-editor>
+                   <el-row>
+            <div class="art-btn">
+                <el-button type="primary" icon="search" @click="reset">重置</el-button>
+                &nbsp;&nbsp;&nbsp;&nbsp;
+                <el-button type="primary" icon="search" @click="saveArt('01')">保存</el-button>
+                &nbsp;&nbsp;&nbsp;&nbsp;
+                <el-button type="primary" icon="search" @click="saveArt('02')">发表</el-button>
+            </div>
+        </el-row>
   </div>
 </template> 
 <script>
@@ -141,8 +152,26 @@ export default {
     onEditorChange() {
       //内容改变事件
     },
-  },
-};
+     //重置数据
+            reset(){
+                // 基础数据重置
+                this.artData = {
+                    wordType: '1',
+                    content: '',
+                    wordContent: '',
+                    module: '',
+                    type: '',
+                    classify: ''
+                }
+                                //ue重置
+                this.$refs.ue.clear();
+                // 重置选择的图片
+                this.$refs.upload.setcropImg(this.uploadInfo.defaultSrc);
+                // 上传成功状态重置
+                this.uploadInfo.response = {};
+            },
+          }   
+  }     
 </script>  
 
 <style scoped>
