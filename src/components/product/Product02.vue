@@ -17,53 +17,90 @@
 <script>
 export default {
   data() {
-      return {
-        data: [{
-          label: '中国文学',
-          children: [{
-            label: '中国古典文学',
-            children: [{
-              label: '唐诗三百首'
-            }]
-          }]
-        }, {
-          label: '外国文学',
-          children: [{
-            label: '外国现代文学',
-            children: [{
-              label: '钢铁是怎样炼成的'
-            }]
-          }, {
-            label: '外国古典文学',
-            children: [{
-              label: '荷马史诗'
-            }]
-          }]
-        }, {
-          label: '儿童文学',
-          children: [{
-            label: '益智书籍',
-            children: [{
-              label: '如何走出迷宫'
-            }]
-          }, {
-            label: '启示书籍',
-            children: [{
-              label: '名人故事'
-            }]
-          }]
-        }],
-        defaultProps: {
-          children: 'children',
-          label: 'label'
-        }
-      };
-    },
+    return {
+      data: [
+        //   {
+        //     label: "中国文学",
+        //     children: [
+        //       {
+        //         label: "中国古典文学",
+        //         children: [
+        //           {
+        //             label: "唐诗三百首",
+        //           },
+        //         ],
+        //       },
+        //     ],
+        //   },
+        //   {
+        //     label: "外国文学",
+        //     children: [
+        //       {
+        //         label: "外国现代文学",
+        //         children: [
+        //           {
+        //             label: "钢铁是怎样炼成的",
+        //           },
+        //         ],
+        //       },
+        //       {
+        //         label: "外国古典文学",
+        //         children: [
+        //           {
+        //             label: "荷马史诗",
+        //           },
+        //         ],
+        //       },
+        //     ],
+        //   },
+        //   {
+        //     label: "儿童文学",
+        //     children: [
+        //       {
+        //         label: "益智书籍",
+        //         children: [
+        //           {
+        //             label: "如何走出迷宫",
+        //           },
+        //         ],
+        //       },
+        //       {
+        //         label: "启示书籍",
+        //         children: [
+        //           {
+        //             label: "名人故事",
+        //           },
+        //         ],
+        //       },
+        //     ],
+        //   },
+      ],
+      defaultProps: {
+        children: "children",
+        label: "name",
+      },
+    };
+  },
+  created() {
+    this.getBookTreeList();
+  },
   methods: {
-      handleNodeClick(data) {
-        console.log(data);
+    handleNodeClick(data) {
+      console.log(data);
+    },
+    async getBookTreeList() {
+      //get请求
+      const res = await this.$http.get("booksClass/selectAllWithBooksClass");
+      var result = res.data;
+      console.log(res);
+      console.log(result);
+      if (result.code == 0) {
+        this.data = result.data;
+      } else if (result.code == 1) {
+        this.$message.error(result.msg + "，登录失败！");
       }
-    }
+    },
+  },
 };
 </script>
 
