@@ -1,7 +1,6 @@
 <template>
   <div>
     <Head></Head>
-
     <div>
       <el-steps :active="active" finish-status="success">
         <el-step title="步骤 1"></el-step>

@@ -17,6 +17,7 @@
           background-color="#314056"
           text-color="#FFF"
           router
+          unique-opened
           :default-active="activePath"
         >
           <el-menu-item>

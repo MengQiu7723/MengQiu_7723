@@ -5,6 +5,7 @@ import {
   FormItem,
   Input,
   Message,
+  MessageBox,
   Container,
   Header,
   Aside,
@@ -30,6 +31,8 @@ import {
   Cascader,
   Timeline,
   TimelineItem,
+  Upload,
+  Select,
   Step,
   Steps,
   Tree
@@ -65,8 +68,11 @@ Vue.use(Dialog)
 Vue.use(Cascader)
 Vue.use(Timeline)
 Vue.use(TimelineItem)
+Vue.use(Upload)
+Vue.use(Select)
 Vue.use(Step)
 Vue.use(Steps)
 Vue.use(Tree)
 Vue.prototype.$message = Message
+Vue.prototype.$confirm = MessageBox.confirm
 

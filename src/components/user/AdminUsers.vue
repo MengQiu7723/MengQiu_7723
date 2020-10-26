@@ -40,7 +40,7 @@
       >
         <!--  -->
         <el-table-column type="index"></el-table-column>
-        <el-table-column label="姓名" prop="userName"></el-table-column>
+        <el-table-column label="姓名" prop="username"></el-table-column>
         <el-table-column label="邮箱" prop="email"></el-table-column>
         <el-table-column label="手机" prop="mobile"></el-table-column>
         <el-table-column label="身份" prop="role_name"></el-table-column>
@@ -272,8 +272,9 @@ export default {
   methods: {
     async getUserList() {
       // 发送请求
-      const { data: res } = await this.$http.get('/api/book/findAll')
-      if (res.code !== 2) {
+      const { data: res } = await this.$http.get('user/findAll')
+      console.log(res)
+      if (res.code !== 0) {
         return this.$message.error('获取用户列表失败！')
       }
       // const res = [
@@ -347,7 +348,7 @@ export default {
     // 展示编辑用户的对话框
     async showEditDialog(id) {
       // console.log(id)
-      const { data: res } = await this.$http.get('/api/user/getById' + id)
+      const { data: res } = await this.$http.get('user/getById' + id)
       if (res.code !== 0) {
         return this.$message.error('查询用户信息失败！')
       }
@@ -364,7 +365,7 @@ export default {
         if (!valid) return
         // 发起修改用户信息的数据请求
         const { data: res } = await this.$http.post(
-          '/api/user/update' + this.editForm.id,
+          'user/update' + this.editForm.id,
           {
             email: this.editForm.email,
             mobile: this.editForm.mobile,
@@ -402,7 +403,7 @@ export default {
         return this.$message.info('已取消删除')
       }
 
-      const { data: res } = await this.$http.delete('users/' + id)
+      const { data: res } = await this.$http.delete('user/delete' + id)
 
       if (res.code !== 2) {
         return this.$message.error('删除用户失败！')
