@@ -69,7 +69,6 @@ export default {
       content: this.value,
       quillUpdateImg: false, // 根据图片上传状态来确定是否显示loading动画，刚开始是false,不显示
       editorOption: {
-        placeholder: "",
         theme: "snow", // or 'bubble'
         placeholder: "您想说点什么？",
         modules: {
