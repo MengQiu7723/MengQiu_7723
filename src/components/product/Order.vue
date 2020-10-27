@@ -119,7 +119,6 @@
 <script>
 import cityData from "./citydata"
 
-
 export default {
   data() {
     return {

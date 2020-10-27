@@ -6,6 +6,7 @@
         <!-- <img src="../assets/heima.png" alt=""> -->
         <span>35后台管理系统</span>
       </div>
+          <el-button type="primary" icon="el-icon-full-screen" size="mini" @click="screen"></el-button>
       <el-button type="info" @click="logout">退出</el-button>
     </el-header>
     <!-- 页面主体 -->
@@ -76,9 +77,15 @@
 </template>
 
 <script>
+
+import screenfull from 'screenfull'
+
 export default {
+  name:"home",
   data() {
     return {
+      //默认不全屏
+      isFullscreen:false,
       //左侧菜单数据
       menulist: [
         {
@@ -138,6 +145,15 @@ export default {
       window.sessionStorage.clear()
       this.$router.push('/login')
     },
+    screen(){
+      //如果不允许进入全屏，发出不允许提示
+      if(!screenfull.isEnabled){
+        this.$message('您的浏览器不能全屏');
+        return false
+      }
+      screenfull.toggle();
+      this.$message.success('全屏拉')
+    }
   },
   handleOpen(key, keyPath) {
     console.log(key, keyPath)
