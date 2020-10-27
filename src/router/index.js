@@ -26,8 +26,6 @@ const router = new Router({
   routes: [
     { path: '/', redirect: '/login' },
     { path: '/login', component: Login },
-    //前台
-    // {},
     //后台管理系统
     {
       path: '/home', component: Home, redirect: '/welcome',
@@ -49,16 +47,16 @@ const router = new Router({
   ]
 })
 
-//挂载路由守卫 没有token，做不了验证2020.09.28
+export default router;
 // router.beforeEach((to, from, next) => {
 //   // to 将要访问的路径
 //   // from 代表从哪个路径跳转而来
 //   // next 是一个函数，表示放行
 //   // next('/login') 强制跳转
-//   if (to.path === '/login') return next();
-//   const tokenStr = window.sessionStorage.getItem('token');
-//   if (!tokenStr) return next('/login')
-//   next()
+//   // if (to.path === '/login') return next()
+//   // const tokenStr = window.sessionStorage.getItem('token')
+//   // if (!tokenStr) return next('/login')
+//   // next()
 // })
 
-export default router;
+

@@ -32,7 +32,7 @@ Vue.use(VueQuillEditor)
 
 // 配置axios请求拦截器
 axios.interceptors.request.use((config) => {
-  // console.log(config)
+  //Token请求头
   config.headers.Authorization = window.sessionStorage.getItem('token');
   return config
 });
