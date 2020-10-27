@@ -7,9 +7,14 @@
         <span>35后台管理系统</span>
       </div>
       <div class="good">
-          <el-button type="primary" icon="el-icon-full-screen"
-           size="mini" @click="screen"></el-button></div>
-      <el-button type="info" @click="logout">退出</el-button>
+        <el-button
+          type="primary"
+          icon="el-icon-full-screen"
+          size="mini"
+          @click="screen"
+        ></el-button>
+        <el-button type="info" @click="logout">退出</el-button>
+      </div>
     </el-header>
     <!-- 页面主体 -->
     <el-container>
@@ -79,15 +84,14 @@
 </template>
 
 <script>
-
 import screenfull from 'screenfull'
 
 export default {
-  name:"home",
+  name: 'home',
   data() {
     return {
       //默认不全屏
-      isFullscreen:false,
+      isFullscreen: false,
       //左侧菜单数据
       menulist: [
         {
@@ -147,15 +151,15 @@ export default {
       window.sessionStorage.clear()
       this.$router.push('/login')
     },
-    screen(){
+    screen() {
       //如果不允许进入全屏，发出不允许提示
-      if(!screenfull.isEnabled){
-        this.$message('您的浏览器不能全屏');
+      if (!screenfull.isEnabled) {
+        this.$message('您的浏览器不能全屏')
         return false
       }
-      screenfull.toggle();
+      screenfull.toggle()
       this.$message.success('全屏拉')
-    }
+    },
   },
   handleOpen(key, keyPath) {
     console.log(key, keyPath)
@@ -167,9 +171,9 @@ export default {
 </script>
 
 <style lang="less" scoped>
-.good{
-  margin-left: 1550px;
-}
+// .good{
+// margin-left: 1550px;
+// }
 .home-container {
   height: 100%;
 }
