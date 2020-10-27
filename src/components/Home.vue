@@ -6,7 +6,9 @@
         <!-- <img src="../assets/heima.png" alt=""> -->
         <span>35后台管理系统</span>
       </div>
-          <el-button type="primary" icon="el-icon-full-screen" size="mini" @click="screen"></el-button>
+      <div class="good">
+          <el-button type="primary" icon="el-icon-full-screen"
+           size="mini" @click="screen"></el-button></div>
       <el-button type="info" @click="logout">退出</el-button>
     </el-header>
     <!-- 页面主体 -->
@@ -165,6 +167,9 @@ export default {
 </script>
 
 <style lang="less" scoped>
+.good{
+  margin-left: 1550px;
+}
 .home-container {
   height: 100%;
 }
