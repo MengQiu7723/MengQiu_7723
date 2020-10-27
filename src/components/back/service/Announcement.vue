@@ -113,9 +113,9 @@ export default {
         wordType: "1",
         content: "",
         wordContent: "",
-        module: "",
-        type: "",
-        classify: "",
+        module: "测试一",
+        type: "测试二",
+        classify: "测试三",
       },
       consts: {
         modules: [],
@@ -169,6 +169,32 @@ export default {
                 this.$refs.upload.setcropImg(this.uploadInfo.defaultSrc);
                 // 上传成功状态重置
                 this.uploadInfo.response = {};
+            },
+                        // 保存文章
+            saveArt(state){
+                let _this = this;
+                _this.$refs['form'].validate((valid) => {
+                    if (valid) {
+                        _this.artData.artState = state;
+                            // 文章内容
+                            this.artData.content = this.$refs.ue.getContent();
+                            // 文档原内容
+                            this.artData.wordContent = this.$refs.ue.getContentTxt();
+                            // 提交文章信息
+                            this.$put("/art/add", this.artData)
+                            .then(function () {
+                                _this.$alert(state === '01' ? "文章保存成功" : "文章发表成功", "提示");
+                                if(!_this.$route.query.key){
+                                    _this.reset();
+                                }
+                            })
+                            .catch(function (error) {
+                                console.log(error);
+                            });
+                    } else {
+                        return false;
+                    }
+                });
             },
           }   
   }     
