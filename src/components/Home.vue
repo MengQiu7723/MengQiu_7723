@@ -23,7 +23,7 @@
           unique-opened
           :default-active="activePath"
         >
-          <el-menu-item>
+          <el-menu-item index="/welcome" @click="saveNavState('/welcome')">
             <!-- 图标 -->
             <i class="el-icon-monitor"></i>
             <!-- 文本 -->
@@ -104,7 +104,7 @@ export default {
           authName: '商品管理',
           children: [
             { id: 122, authName: '商品列表', path: 'product' },
-            { id: 123, authName: '--管理', path: 'product02' },
+            { id: 123, authName: '商品分类', path: 'product02' },
           ],
         },
         {
