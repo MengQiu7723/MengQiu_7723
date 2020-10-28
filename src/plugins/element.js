@@ -32,10 +32,11 @@ import {
   Timeline,
   TimelineItem,
   Upload,
-  Select,
   Step,
   Steps,
-  Tree
+  Tree,
+  Select,
+  Option
 } from 'element-ui'
 
 
@@ -69,10 +70,11 @@ Vue.use(Cascader)
 Vue.use(Timeline)
 Vue.use(TimelineItem)
 Vue.use(Upload)
-Vue.use(Select)
 Vue.use(Step)
 Vue.use(Steps)
 Vue.use(Tree)
+Vue.use(Select)
+Vue.use(Option)
 Vue.prototype.$message = Message
 Vue.prototype.$confirm = MessageBox.confirm
 
