@@ -32,13 +32,17 @@ import {
   Timeline,
   TimelineItem,
   Upload,
-  Select,
   Step,
   Steps,
   Tree,
+<<<<<<< HEAD
   Dropdown,
   DropdownMenu,
   DropdownItem
+=======
+  Select,
+  Option
+>>>>>>> 57677a982262444bd67a261c7d40201b5cb25fb9
 } from 'element-ui'
 
 
@@ -72,13 +76,17 @@ Vue.use(Cascader)
 Vue.use(Timeline)
 Vue.use(TimelineItem)
 Vue.use(Upload)
-Vue.use(Select)
 Vue.use(Step)
 Vue.use(Steps)
 Vue.use(Tree)
+<<<<<<< HEAD
 Vue.use(Dropdown)
 Vue.use(DropdownMenu)
 Vue.use(DropdownItem)
+=======
+Vue.use(Select)
+Vue.use(Option)
+>>>>>>> 57677a982262444bd67a261c7d40201b5cb25fb9
 Vue.prototype.$message = Message
 Vue.prototype.$confirm = MessageBox.confirm
 
