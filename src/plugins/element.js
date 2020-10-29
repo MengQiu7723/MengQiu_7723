@@ -35,14 +35,10 @@ import {
   Step,
   Steps,
   Tree,
-<<<<<<< HEAD
-  Dropdown,
-  DropdownMenu,
-  DropdownItem
-=======
   Select,
-  Option
->>>>>>> 57677a982262444bd67a261c7d40201b5cb25fb9
+  Option,
+  Carousel,
+  CarouselItem
 } from 'element-ui'
 
 
@@ -79,14 +75,10 @@ Vue.use(Upload)
 Vue.use(Step)
 Vue.use(Steps)
 Vue.use(Tree)
-<<<<<<< HEAD
-Vue.use(Dropdown)
-Vue.use(DropdownMenu)
-Vue.use(DropdownItem)
-=======
 Vue.use(Select)
 Vue.use(Option)
->>>>>>> 57677a982262444bd67a261c7d40201b5cb25fb9
+Vue.use(Carousel)
+Vue.use(CarouselItem)
 Vue.prototype.$message = Message
 Vue.prototype.$confirm = MessageBox.confirm
 
