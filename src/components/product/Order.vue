@@ -196,6 +196,7 @@ export default {
 
       this.progressVisible = true
     },
+
     //方法里面
   },
   // 监听 pagesize 改变的事件
@@ -216,4 +217,11 @@ export default {
 .el-cascader {
   width: 100%;
 }
+  .el-dropdown-link {
+    cursor: pointer;
+    color: #409EFF;
+  }
+  .el-icon-arrow-down {
+    font-size: 12px;
+  }
 </style>

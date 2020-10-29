@@ -36,7 +36,9 @@ import {
   Steps,
   Tree,
   Select,
-  Option
+  Option,
+  Carousel,
+  CarouselItem
 } from 'element-ui'
 
 
@@ -75,6 +77,8 @@ Vue.use(Steps)
 Vue.use(Tree)
 Vue.use(Select)
 Vue.use(Option)
+Vue.use(Carousel)
+Vue.use(CarouselItem)
 Vue.prototype.$message = Message
 Vue.prototype.$confirm = MessageBox.confirm
 
