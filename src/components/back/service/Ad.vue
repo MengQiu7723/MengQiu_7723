@@ -21,6 +21,7 @@ export default {
 
   data(){
     return{
+      //获取走马灯图片
       img_list:[
         { path:require('../../../assets/images/book1.png')},
         { path:require('../../../assets/images/sunrise.png')},
