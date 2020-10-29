@@ -30,7 +30,7 @@
     "eslint": "^6.7.2",
     "eslint-plugin-vue": "^6.2.2",
     "less": "^3.12.2",
-    "less-loader": "^7.0.1",
+    "less-loader": "^7.0.2",
     "node-sass": "^4.14.1",
     "sass-loader": "^10.0.3",
     "sass-resources-loader": "^2.1.1",
