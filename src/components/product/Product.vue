@@ -71,7 +71,7 @@
 
     <!-- 添加用户的对话框 -->
     <el-dialog
-      title="添加用户"
+      title="添加商品"
       :visible.sync="addDialogVisible"
       width="50%"
       :before-close="handleClose"
