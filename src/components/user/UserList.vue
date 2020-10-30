@@ -1,14 +1,14 @@
 <template>
   <div class="app">
-    <p>前端分页demo</p>
+    <p>后端分页demo</p>
     <!-- 将获取到的数据进行计算 -->
     <el-table :data="tableData" style="width: 100%" border stripe>
       <el-table-column type="index"></el-table-column>
       <el-table-column label="姓名" prop="username"></el-table-column>
       <el-table-column label="邮箱" prop="email"></el-table-column>
       <el-table-column label="手机" prop="mobile"></el-table-column>
-      <el-table-column label="身份" prop="role_name"></el-table-column>
     </el-table>
+
     <div class="tabListPage">
       <el-pagination
         @size-change="handleSizeChange"
