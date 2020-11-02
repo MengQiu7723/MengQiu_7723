@@ -1,34 +1,48 @@
-
-.theme(@backcolor:rgb(231,198,203),@fcolor:rgb(39,35,35),@primaryColor:#fff,
-@btnColor:#c47682)
-{
-    .header{
-        color: @fcolor;
-        background: @backcolor;
-    }
-    *{
-        color: @fcolor;
-    }
-    //top 背景色
-    .ivu-layout-header,
-    .ivu-menu-light{
-        background: @backcolor;
-    }
-    .conditions,.list,.ivu-menu-light,.ivu-layout-sider-trigger,
-    .layout-footer-center,.ivu-layout-sider-trigger,
-    .ivu-layout-sider{
-        background: @backcolor !important;
-    }
-    .itemActive{
-        color: @backcolor !important;
-        box-shadow: 0px 0px 15px 7px rgb(121, 170,220) inset;
-    }
-    .infoList{
-        background: @primaryColor;
-        color: @fcolor !important;
-    }
-    .ivu-btn-primary{
-        background-color: @btnColor;
-        border-color: @btnColor;
-    }
+.theme(@backcolor:#EEA2AD,@fcolor:#fff) {
+ .header {
+ color: @fcolor;
+ background: @backcolor;
+ width: 100%;
+ height: 2rem;
+ position: relative;
+ 
+ h4 {
+  width: 100%;
+  text-align: center;
+  line-height: 2rem;
+  font-size: 1rem;
+ }
+ .go-back {
+  width: 2rem;
+  height: 2rem;
+  text-align: center;
+  color: #fff;
+  font-size: 0.8rem;
+  float: left;
+  line-height: 2rem;
+  margin-left: 1rem;
+  position: absolute;
+  left: 0;
+  top: 0;
+ }
+ .header-cont {
+  width: 100%;
+  text-align: center;
+  line-height: 2rem;
+  font-size: 1rem;
+  color: #fff;
+ }
+ .colorBtn {
+  width: 2rem;
+  height: 2rem;
+  text-align: center;
+  color: #fff;
+  font-size: 0.8rem;
+  line-height: 2rem;
+  margin-right: 1rem;
+  position: absolute;
+  top: 0;
+  right: 0;
+ }
+ }
 }

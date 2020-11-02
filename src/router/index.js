@@ -20,12 +20,16 @@ import Skin from '../components/back/service/Skin.vue'
 import Chart from '../components/back/statistics/Chart.vue'
 import Rank from '../components/back/statistics/Rank.vue'
 
+import Td from '../components/demo/TreeDemo.vue'
+
+
 Vue.use(Router)
 
 const router = new Router({
   routes: [
     { path: '/', redirect: '/login' },
     { path: '/login', component: Login },
+    { path: '/demo', component: Td },
     //后台管理系统
     {
       path: '/home', component: Home, redirect: '/welcome',
