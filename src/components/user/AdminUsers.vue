@@ -22,7 +22,7 @@
         </el-col>
         <el-col :span="4">
           <el-button type="primary" @click="addDialogVisible = true"
-            >添加用户</el-button
+            >添加管理员</el-button
           >
         </el-col>
       </el-row>
@@ -40,9 +40,8 @@
       >
         <!--  -->
         <el-table-column type="index"></el-table-column>
-        <el-table-column label="姓名" prop="username"></el-table-column>
-        <el-table-column label="邮箱" prop="email"></el-table-column>
-        <el-table-column label="手机" prop="mobile"></el-table-column>
+        <el-table-column label="姓名" prop="adminName"></el-table-column>
+        <el-table-column label="密码" prop="password"></el-table-column>
         <el-table-column label="身份" prop="role_name"></el-table-column>
         <el-table-column label="状态" prop="mg_state">
           <template slot-scope="scope">
@@ -113,17 +112,11 @@
         ref="addFormRef"
         label-width="70px"
       >
-        <el-form-item label="用户名" prop="username">
-          <el-input v-model="addForm.username"></el-input>
+        <el-form-item label="用户名" prop="adminName">
+          <el-input v-model="addForm.adminName"></el-input>
         </el-form-item>
         <el-form-item label="密码" prop="password">
           <el-input v-model="addForm.password"></el-input>
-        </el-form-item>
-        <el-form-item label="邮箱" prop="email">
-          <el-input v-model="addForm.email"></el-input>
-        </el-form-item>
-        <el-form-item label="手机" prop="mobile">
-          <el-input v-model="addForm.mobile"></el-input>
         </el-form-item>
       </el-form>
       <!-- 底部区域 -->
@@ -146,14 +139,11 @@
         ref="editFormRef"
         label-width="70px"
       >
-        <el-form-item label="用户名">
-          <el-input v-model="editForm.username" disabled></el-input>
+        <el-form-item label="名称">
+          <el-input v-model="editForm.adminName"></el-input>
         </el-form-item>
-        <el-form-item label="邮箱" prop="email">
-          <el-input v-model="editForm.email"></el-input>
-        </el-form-item>
-        <el-form-item label="手机" prop="mobile">
-          <el-input v-model="editForm.mobile"></el-input>
+        <el-form-item label="密码">
+          <el-input v-model="editForm.password"></el-input>
         </el-form-item>
       </el-form>
       <span slot="footer" class="dialog-footer">
@@ -197,24 +187,40 @@ export default {
         // 当前的页数
         pagenum: 1,
         // 当前每页显示多少条数据
-        pagesize: 1,
+        pagesize: 5,
       },
       //获取的用户列表
-      userList: [],
+      userList: [
+        /** 
+        {
+          id: 1,
+          userName: 'admin',
+          email: '20201013@gzs.com',
+          mobile: '202010131036',
+          role_name: '炒鸡管理员',
+          mg_state: true,
+        },
+        {
+          id: 2,
+          userName: 'tony',
+          email: '20201013@gzs.com',
+          mobile: '202010131036',
+          role_name: '炒蛋管理员',
+          mg_state: false,
+        },**/
+      ],
       //数据总数
       total: 0,
       //控制对话框的显示与隐藏
       addDialogVisible: false,
       // 添加用户的表单数据
       addForm: {
-        username: '',
+        adminName: '',
         password: '',
-        email: '',
-        mobile: '',
       },
       // 添加表单的验证规则对象
       addFormRules: {
-        username: [
+        adminName: [
           { required: true, message: '请输入用户名', trigger: 'blur' },
           {
             min: 3,
@@ -244,7 +250,11 @@ export default {
       // 控制修改用户对话框的显示与隐藏
       editDialogVisible: false,
       // 查询到的用户信息对象
-      editForm: {},
+      editForm: {
+        id: '',
+        adminName: '',
+        password: '',
+      },
       // 修改表单的验证规则对象
       editFormRules: {
         email: [
@@ -272,30 +282,11 @@ export default {
   methods: {
     async getUserList() {
       // 发送请求
-      const { data: res } = await this.$http.get('user/findAll')
-      console.log(res)
+      const { data: res } = await this.$http.get('admin/findAll')
+      // console.log(res)
       if (res.code !== 0) {
-        return this.$message.error('获取用户列表失败！')
+        return this.$message.error('获取列表失败！')
       }
-      // const res = [
-      //   {
-      //     id: 1,
-      //     userName: 'admin',
-      //     email: '20201013@gzs.com',
-      //     mobile: '202010131036',
-      //     role_name: '炒鸡管理员',
-      //     mg_state: true,
-      //   },
-      //   {
-      //     id: 2,
-      //     userName: 'tony',
-      //     email: '20201013@gzs.com',
-      //     mobile: '202010131036',
-      //     role_name: '炒蛋管理员',
-      //     mg_state: false,
-      //   },
-      // ]
-      // this.userList = res
       this.userList = res.data
       this.total = this.userList.length
     },
@@ -315,7 +306,7 @@ export default {
     // 监听 switch 开关状态的改变
     async userStateChange(userinfo) {
       console.log(userinfo)
-      const { data: res } = await this.$http.put('/api/')
+      const { data: res } = await this.$http.put('')
       if (res.code !== 0) {
         userinfo.mg_state = !userinfo.mg_state
         return this.$message.error('更新用户状态失败')
@@ -332,13 +323,13 @@ export default {
         if (!valid) return
         // 可以发起添加用户的网络请求
         const { data: res } = await this.$http.post(
-          '/api/user/regist',
+          'admin/insert',
           this.addForm
         )
-        if (res.code !== 0) {
-          this.$message.error('添加用户失败！')
-        }
-        this.$message.success('添加用户成功！')
+        if (res.code == 0) {
+          this.$message.success('添加用户成功！')
+        }else
+        this.$message.error(res.msg)
         // 隐藏添加用户的对话框
         this.addDialogVisible = false
         // 重新获取用户列表数据
@@ -348,7 +339,9 @@ export default {
     // 展示编辑用户的对话框
     async showEditDialog(id) {
       // console.log(id)
-      const { data: res } = await this.$http.get('user/getById' + id)
+      const { data: res } = await this.$http.get('admin/getById', {
+        params: { id: id },
+      })
       if (res.code !== 0) {
         return this.$message.error('查询用户信息失败！')
       }
@@ -364,17 +357,15 @@ export default {
       this.$refs.editFormRef.validate(async (valid) => {
         if (!valid) return
         // 发起修改用户信息的数据请求
-        const { data: res } = await this.$http.post(
-          'user/update' + this.editForm.id,
-          {
-            email: this.editForm.email,
-            mobile: this.editForm.mobile,
-          }
-        )
-        if (res.code !== 2) {
+        const { data: res } = await this.$http.post('admin/update', {
+          id: this.editForm.id,
+          adminName: this.editForm.adminName,
+          password: this.editForm.password,
+        })
+        console.log(res)
+        if (res.code !== 0) {
           return this.$message.error('更新用户信息失败！')
         }
-
         // 关闭对话框
         this.editDialogVisible = false
         // 刷新数据列表
@@ -402,13 +393,13 @@ export default {
       if (confirmResult !== 'confirm') {
         return this.$message.info('已取消删除')
       }
-
-      const { data: res } = await this.$http.delete('user/delete' + id)
-
-      if (res.code !== 2) {
+      const { data: res } = await this.$http.delete('admin/delete', {
+        params: { id: id },
+      })
+      console.log(res)
+      if (res.code !== 0) {
         return this.$message.error('删除用户失败！')
       }
-
       this.$message.success('删除用户成功！')
       this.getUserList()
     },
