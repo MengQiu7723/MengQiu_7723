@@ -23,6 +23,7 @@ import Rank from '../components/back/statistics/Rank.vue'
 import Td from '../components/demo/TreeDemo.vue'
 
 
+
 Vue.use(Router)
 
 const router = new Router({
@@ -45,7 +46,7 @@ const router = new Router({
         { path: '/announcement', component: An },
         { path: '/skin', component: Skin },
         { path: '/chart', component: Chart },
-        { path: '/rank', component: Rank }
+        { path: '/rank', component: Rank },
       ]
     }
   ]
