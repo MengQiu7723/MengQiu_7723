@@ -32,61 +32,101 @@
           <el-button type="primary" @click="onSubmit">查询</el-button>
         </el-form-item>
       </el-form>
-    
 
-    <div class="table">
-      <el-row>
-        <el-button type="text" @click="dialogFormVisible = true"> 添加广告 </el-button>
-         <div class="form">
-           <el-form :model="ruleForm" ref="ruleForm" label-width="120px" class="demo-ruleForm">
-         <el-dialog title="添加" :visible.sync="dialogFormVisible">
-  <el-form :model="form">
-    <el-form-item label="名称" prop="name" :rules="[{required:true,message:'不能为空',trigger:'blur'}]">
-      <el-input v-model="ruleForm.name"></el-input>
-    </el-form-item>
-    <el-form-item label="广告类型" prop="type">
-      <el-select v-model="ruleForm.type" @change="selAdvertisingType" placeholder="广告类型">
-                    <el-option label="图片" value="IMAGE"></el-option>
-                    <el-option label="视频" value="VIDEO"></el-option>
-                </el-select>
-    </el-form-item>
-    <el-form-item v-if="isTime" label="间隔时间(秒)" prop="interval"
-                          :rules="[{required: true, message: '不能为空', trigger: 'blur'}]">
-                <el-input type="number" v-model="ruleForm.interval"></el-input>
-            </el-form-item>
-            <el-form-item label="设备类型" prop="deviceTypeId"
+      <div class="table">
+        <el-row>
+          <el-button type="text" @click="dialogFormVisible = true">
+            添加广告
+          </el-button>
+          <div class="form">
+            <el-form
+              :model="ruleForm"
+              ref="ruleForm"
+              label-width="120px"
+              class="demo-ruleForm"
             >
-                <el-select v-model="ruleForm.deviceTypeId" placeholder="设备类型" @change="selEquipmentType">
-                    <el-option v-for="item in equipmentType" :label="item.name" :value="item.id" key=""></el-option>
-                </el-select>
-            </el-form-item>
-            <el-form-item label="广告位类型" prop="adSpaceTypeId"
-            >
-                <el-select v-model="ruleForm.adSpaceTypeId" placeholder="广告位类型">
-                    <el-option v-for="item in advertisingSpaceType" :label="item.name"
-                               :value="item.id" key=""></el-option>
-                </el-select>
-            </el-form-item>
-            <el-form-item style="text-align: center;">
-                <el-button type="primary" @click="submitForm('ruleForm')">{{submitTitle}}</el-button>
-                <el-button @click="resetForm('ruleForm')">重置</el-button>
-            </el-form-item>
-  </el-form>
-</el-dialog>
-           </el-form>
-         </div>
-
-      </el-row>
-      <el-table :data="lists" style="width: 100%">
-        <el-table-column prop="name" label="名称"> </el-table-column>
-        <el-table-column prop="type" label="类型"> </el-table-column>
-        <el-table-column prop="stateText" label="状态"> </el-table-column>
-        <el-table-column prop="devices" label="设备台数"> </el-table-column>
-        <el-table-column prop="right" label="操作"> </el-table-column>
-      </el-table>
-      <el-pagination background layout="prev, pager, next" :total="1000">
-      </el-pagination>
-    </div>
+              <el-dialog title="添加" :visible.sync="dialogFormVisible">
+                <el-form :model="form">
+                  <el-form-item
+                    label="名称"
+                    prop="name"
+                    :rules="[
+                      { required: true, message: '不能为空', trigger: 'blur' },
+                    ]"
+                  >
+                    <el-input v-model="ruleForm.name"></el-input>
+                  </el-form-item>
+                  <el-form-item label="广告类型" prop="type">
+                    <el-select
+                      v-model="ruleForm.type"
+                      @change="selAdvertisingType"
+                      placeholder="广告类型"
+                    >
+                      <el-option label="图片" value="IMAGE"></el-option>
+                      <el-option label="视频" value="VIDEO"></el-option>
+                    </el-select>
+                  </el-form-item>
+                  <el-form-item
+                    v-if="isTime"
+                    label="间隔时间(秒)"
+                    prop="interval"
+                    :rules="[
+                      { required: true, message: '不能为空', trigger: 'blur' },
+                    ]"
+                  >
+                    <el-input
+                      type="number"
+                      v-model="ruleForm.interval"
+                    ></el-input>
+                  </el-form-item>
+                  <el-form-item label="设备类型" prop="deviceTypeId">
+                    <el-select
+                      v-model="ruleForm.deviceTypeId"
+                      placeholder="设备类型"
+                      @change="selEquipmentType"
+                    >
+                      <el-option
+                        v-for="item in equipmentType"
+                        :label="item.name"
+                        :value="item.id"
+                        key=""
+                      ></el-option>
+                    </el-select>
+                  </el-form-item>
+                  <el-form-item label="广告位类型" prop="adSpaceTypeId">
+                    <el-select
+                      v-model="ruleForm.adSpaceTypeId"
+                      placeholder="广告位类型"
+                    >
+                      <el-option
+                        v-for="item in advertisingSpaceType"
+                        :label="item.name"
+                        :value="item.id"
+                        key=""
+                      ></el-option>
+                    </el-select>
+                  </el-form-item>
+                  <el-form-item style="text-align: center">
+                    <el-button type="primary" @click="submitForm('ruleForm')">{{
+                      submitTitle
+                    }}</el-button>
+                    <el-button @click="resetForm('ruleForm')">重置</el-button>
+                  </el-form-item>
+                </el-form>
+              </el-dialog>
+            </el-form>
+          </div>
+        </el-row>
+        <el-table :data="lists" style="width: 100%">
+          <el-table-column prop="name" label="名称"> </el-table-column>
+          <el-table-column prop="type" label="类型"> </el-table-column>
+          <el-table-column prop="stateText" label="状态"> </el-table-column>
+          <el-table-column prop="devices" label="设备台数"> </el-table-column>
+          <el-table-column prop="right" label="操作"> </el-table-column>
+        </el-table>
+        <el-pagination background layout="prev, pager, next" :total="1000">
+        </el-pagination>
+      </div>
     </div>
   </div>
 </template>
@@ -95,7 +135,7 @@
 export default {
   data() {
     return {
-      submitTitle:'立即创建',
+      submitTitle: "立即创建",
       dialogFormVisible: false,
       isTime: true,
       ruleForm: {
@@ -139,13 +179,17 @@ export default {
   },
   components: {},
   methods: {
-/**
-             * 重置
-             */
+    /**
+     * 重置
+     */
 
-            resetForm(formName) {
-                this.$refs[formName].resetFields();
-            },
+    resetForm() {
+      this.formInline ={
+        name:'',
+        type:'',
+      };
+      this.$$emit("resetForm");
+    },
 
     // 重置按钮
     resetForm1() {
@@ -153,7 +197,7 @@ export default {
         name: "",
         type: "",
       };
-      this.$$emit("resetForm");
+      this.$emit("resetForm");
     },
 
     //查询按钮
