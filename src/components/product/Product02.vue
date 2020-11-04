@@ -63,6 +63,9 @@ export default {
     this.getBookTreeList();
   },
   methods: {
+    iseEdit(){
+      
+    },
     handleNodeClick(data) {
       console.log(data);
     },
@@ -80,7 +83,7 @@ export default {
       }
     },
     append(data) {
-      const newChild = { id: id++, label: "testtest", children: [] };
+      const newChild = { id: id++, label: iseEdit(), children: [] };
       if (!data.children) {
         this.$set(data, "children", []);
       }
