@@ -39,6 +39,10 @@ import {
   Option,
   Carousel,
   CarouselItem,
+  Dropdown,
+  DropdownMenu,
+  DropdownItem,
+  Link
 } from 'element-ui'
 
 
@@ -79,6 +83,10 @@ Vue.use(Select)
 Vue.use(Option)
 Vue.use(Carousel)
 Vue.use(CarouselItem)
+Vue.use(Dropdown)
+Vue.use(DropdownMenu)
+Vue.use(DropdownItem)
+Vue.use(Link)
 Vue.prototype.$message = Message
 Vue.prototype.$confirm = MessageBox.confirm
 
