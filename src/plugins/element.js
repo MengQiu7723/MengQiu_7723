@@ -38,7 +38,7 @@ import {
   Select,
   Option,
   Carousel,
-  CarouselItem
+  CarouselItem,
 } from 'element-ui'
 
 

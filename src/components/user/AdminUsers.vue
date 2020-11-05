@@ -191,8 +191,7 @@ export default {
       },
       //获取的用户列表
       userList: [
-        /** 
-        {
+        /*  {
           id: 1,
           userName: 'admin',
           email: '20201013@gzs.com',
@@ -207,7 +206,7 @@ export default {
           mobile: '202010131036',
           role_name: '炒蛋管理员',
           mg_state: false,
-        },**/
+        }, */
       ],
       //数据总数
       total: 0,
@@ -328,8 +327,7 @@ export default {
         )
         if (res.code == 0) {
           this.$message.success('添加用户成功！')
-        }else
-        this.$message.error(res.msg)
+        } else this.$message.error(res.msg)
         // 隐藏添加用户的对话框
         this.addDialogVisible = false
         // 重新获取用户列表数据
@@ -403,20 +401,17 @@ export default {
       this.$message.success('删除用户成功！')
       this.getUserList()
     },
-    // // 展示分配角色的对话框
-    // async setRole(userInfo) {
-    //   this.userInfo = userInfo
-
-    //   // 在展示对话框之前，获取所有角色的列表
-    //   const { data: res } = await this.$http.get('roles')
-    //   if (res.meta.status !== 200) {
-    //     return this.$message.error('获取角色列表失败！')
-    //   }
-
-    //   this.rolesList = res.data
-
-    //   this.setRoleDialogVisible = true
-    // },
+    /*   // 展示分配角色的对话框
+    async setRole(userInfo) {
+      this.userInfo = userInfo
+      // 在展示对话框之前，获取所有角色的列表
+      const { data: res } = await this.$http.get('roles')
+      if (res.meta.status !== 200) {
+        return this.$message.error('获取角色列表失败！')
+      }
+      this.rolesList = res.data
+      this.setRoleDialogVisible = true
+    }, */
   },
 }
 </script>
