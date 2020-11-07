@@ -20,12 +20,20 @@ import Skin from '../components/back/service/Skin.vue'
 import Chart from '../components/back/statistics/Chart.vue'
 import Rank from '../components/back/statistics/Rank.vue'
 
+import Td from '../components/demo/TreeDemo.vue'
+import Up from '../components/demo/UploadDemo.vue'
+import Up2 from '../components/demo/UploadDemo2.vue'
+
+
 Vue.use(Router)
 
 const router = new Router({
   routes: [
     { path: '/', redirect: '/login' },
     { path: '/login', component: Login },
+    { path: '/tree', component: Td },
+    { path: '/upload', component: Up },
+    { path: '/upload2', component: Up2 },
     //后台管理系统
     {
       path: '/home', component: Home, redirect: '/welcome',
@@ -41,7 +49,7 @@ const router = new Router({
         { path: '/announcement', component: An },
         { path: '/skin', component: Skin },
         { path: '/chart', component: Chart },
-        { path: '/rank', component: Rank }
+        { path: '/rank', component: Rank },
       ]
     }
   ]

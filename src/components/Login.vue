@@ -14,9 +14,9 @@
         class="login_form"
       >
         <!-- 用户名 -->
-        <el-form-item prop="username">
+        <el-form-item prop="adminName">
           <el-input
-            v-model="loginForm.username"
+            v-model="loginForm.adminName"
             prefix-icon="el-icon-user"
           ></el-input>
         </el-form-item>
@@ -44,13 +44,13 @@ export default {
     return {
       // 这是登录表单的数据绑定对象
       loginForm: {
-        username: 'admin',
+        adminName: 'admin',
         password: '123456',
       },
       // 这是表单的验证规则对象
       loginFormRules: {
         // 验证用户名是否合法
-        username: [
+        adminName: [
           { required: true, message: '请输入登录名称', trigger: 'blur' },
           {
             min: 3,
@@ -82,34 +82,34 @@ export default {
     login() {
       this.$refs.loginFormRef.validate(async (valid) => {
         if (!valid) return
-        if (
-          this.loginForm.username == 'admin' &&
-          this.loginForm.password == 123456
-        ) {
+        // if (
+        //   this.loginForm.username == 'admin' &&
+        //   this.loginForm.password == 123456
+        // ) {
+        //   this.$message.success('登录成功')
+        //   this.$router.push('/home')
+        // } else {
+        //get请求
+        const { data: res } = await this.$http.get('admin/login', {
+          params: this.loginForm,
+        })
+        console.log(res)
+        if (res.code == 0) {
+          //登录成功状态码，这个是后端定义的
+          // 1. 将登录成功之后的 token，保存到客户端的 sessionStorage 中
+          //   1.1 项目中出了登录之外的其他API接口，必须在登录之后才能访问
+          //   1.2 token 只应在当前网站打开期间生效，所以将 token 保存在 sessionStorage 中
+          // window.sessionStorage.setItem('token', res.data)
+          // 2. 通过编程式导航跳转到后台主页，路由地址是 /home
+          // this.$router.push("/home");
           this.$message.success('登录成功')
           this.$router.push('/home')
-        } else {
-          //get请求
-          const { data: res } = await this.$http.get('user/login', {
-            params: this.loginForm,
-          })
-          console.log(res)
-          if (res.code == 0) {
-            //登录成功状态码，这个是后端定义的
-            // 1. 将登录成功之后的 token，保存到客户端的 sessionStorage 中
-            //   1.1 项目中出了登录之外的其他API接口，必须在登录之后才能访问
-            //   1.2 token 只应在当前网站打开期间生效，所以将 token 保存在 sessionStorage 中
-            window.sessionStorage.setItem('token', res.data)
-            // 2. 通过编程式导航跳转到后台主页，路由地址是 /home
-            // this.$router.push("/home");
-            this.$message.success('登录成功')
-            this.$router.push('/home')
-          } else if (res.code == 1) {
-            this.$message.error(res.msg + '，登录失败！')
-          }
-          // console.log(res);
-          //get请求
+        } else if (res.code == 1) {
+          this.$message.error(res.msg + '，登录失败！')
         }
+        // console.log(res);
+        //get请求
+        // }
       })
     },
   },

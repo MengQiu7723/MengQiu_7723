@@ -183,7 +183,7 @@ export default {
                             // 提交文章信息
                             this.$put("/art/add", this.artData)
                             .then(function () {
-                                _this.$alert(state === '01' ? "文章保存成功" : "文章发表成功", "提示");
+                                _this.$alert(state === '02' ? "文章保存成功" : "文章发表成功", "提示");
                                 if(!_this.$route.query.key){
                                     _this.reset();
                                 }
