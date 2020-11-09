@@ -207,23 +207,24 @@ export default {
   },
 
   methods: {
-    //get发起用户列表请求
-    // async getData() {
-    //   const { data: res } = await this.$http.get('seller/page', {
-    //     params: { pageNo: this.pageNo, pageSize: this.pageSize },
-    //   })
-    //   console.log(res)
-    //   // 用户列表赋值给tableData
-    //   this.tableData = res.data.results
-    //   // 列表数据总数totalRecord
-    //   this.totalRecord = res.totalRecord
-    //   //当前页码*（第几页）
-    //   this.pageNo = res.pageNo
-    //   //当前页要显示多少条数据
-    //   this.pageSize = res.pageSize
-    // },
+   /*  get发起用户列表请求
+    async getData() {
+      const { data: res } = await this.$http.get('seller/page', {
+        params: { pageNo: this.pageNo, pageSize: this.pageSize },
+      })
+      console.log(res)
+      // 用户列表赋值给tableData
+      this.tableData = res.data.results
+      // 列表数据总数totalRecord
+      this.totalRecord = res.totalRecord
+      //当前页码*（第几页）
+      this.pageNo = res.pageNo
+      //当前页要显示多少条数据
+      this.pageSize = res.pageSize
+    }, */
     async getData() {
       const { data: res } = await this.$http.get('seller/findAll')
+      console.log(res);
       this.tableData = res.data
     },
 
@@ -271,13 +272,13 @@ export default {
     showEditDialog(id) {
       const editText = id
       console.log(editText)
-      // const { data: res } = await this.$http.get('admin/getById', {
-      //   params: { id: id },
-      // })
-      // if (res.code !== 0) {
-      //   return this.$message.error('查询用户信息失败！')
-      // }
-      // this.editForm = res.data
+     /*  const { data: res } = await this.$http.get('admin/getById', {
+        params: { id: id },
+      })
+      if (res.code !== 0) {
+        return this.$message.error('查询用户信息失败！')
+      }
+      this.editForm = res.data */
       this.editForm = editText
       this.editDialogVisible = true
     },
