@@ -16,7 +16,7 @@
           </el-input>
         </el-col>
         <el-col :span="4">
-          <el-button type="primary" @click="addDialogVisible = true"
+          <el-button type="primary" @click="addDialogVisible = true" v-if="role == 1"
             >添加商品</el-button
           ></el-col
         >
@@ -177,6 +177,7 @@
 export default {
   data() {
     return {
+      role: localStorage.getItem("role"),
       queryInfo: {
         query: '',
         pagenum: 1,
