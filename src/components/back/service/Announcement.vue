@@ -5,6 +5,26 @@
       <el-breadcrumb-item>公告管理</el-breadcrumb-item>
       <el-breadcrumb-item>发表公告</el-breadcrumb-item>
     </el-breadcrumb>
+
+    <el-dropdown :show-timeout="100" trigger="click">
+      <el-button plain>
+        {{ !comment_disabled?'平台: 开':'平台:关'}}
+        <i class="el-icon-caret-bottom el-icon--right" />
+      </el-button>
+      <el-dropdown-menu slot="dropdown" class="no-padding">
+        <el-dropdown-item>
+          <el-radio-group v-model="comment_disabled" style="padding:10px;">
+            <el-radio :label="true">
+              开 平台
+            </el-radio>
+            <el-radio :label="false">
+              关 平台
+            </el-radio>
+          </el-radio-group>
+        </el-dropdown-item>
+      </el-dropdown-menu>
+    </el-dropdown>
+
     <el-form ref="form" label-width="100px" :rules="rules" :model="artData">
       <el-form-item label="文章标题" prop="title">
         <el-input v-model="artData.title"></el-input>
@@ -105,6 +125,22 @@ import {} from "vue-quill-editor";
 export default {
   data() {
     return {
+      props:{
+        value:{
+          type:Boolean,
+          default:false
+        }
+      },
+      computed:{
+       comment_disabled:{
+         get(){
+           return this.value
+         },
+         set(val){
+           this.$emit('input',val)
+         }
+       }
+      },
       config: {
         // ueditor默认文本框大小
         initialFrameHeight: 300,
