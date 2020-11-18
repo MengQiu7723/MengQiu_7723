@@ -43,7 +43,9 @@ import {
   DropdownMenu,
   DropdownItem,
   Link,
-  Radio
+  Radio,
+  DatePicker,
+  RadioGroup
 } from 'element-ui'
 
 
@@ -89,6 +91,8 @@ Vue.use(DropdownMenu)
 Vue.use(DropdownItem)
 Vue.use(Link)
 Vue.use(Radio)
+Vue.use(DatePicker)
+Vue.use(RadioGroup)
 Vue.prototype.$message = Message
 Vue.prototype.$confirm = MessageBox.confirm
 
