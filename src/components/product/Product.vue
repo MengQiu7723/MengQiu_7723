@@ -16,7 +16,10 @@
           </el-input>
         </el-col>
         <el-col :span="4">
-          <el-button type="primary" @click="addDialogVisible = true" v-if="role == 1"
+          <el-button
+            type="primary"
+            @click="addDialogVisible = true"
+            v-if="role == 1"
             >添加商品</el-button
           ></el-col
         >
@@ -71,6 +74,7 @@
       :visible.sync="addDialogVisible"
       width="50%"
       :before-close="handleClose"
+      :fullscreen=true
     >
       <!-- 主容主体信息 -->
       <el-form
@@ -82,7 +86,12 @@
         <el-row :gutter="20">
           <el-col :span="12">
             <el-form-item label="分类" prop="cid">
-              <el-input v-model="bookInfo.cid"></el-input>
+              <el-cascader
+                v-model="bookInfo.cid"
+                :options="options"
+                :props="defaultProps"
+                @change="handleChange"
+              ></el-cascader>
             </el-form-item>
 
             <el-form-item label="书名" prop="bookName">
@@ -177,7 +186,7 @@
 export default {
   data() {
     return {
-      role: localStorage.getItem("role"),
+      role: localStorage.getItem('role'),
       queryInfo: {
         query: '',
         pagenum: 1,
@@ -265,17 +274,35 @@ export default {
         ],
       },
       editFormRules: {},
+      /*  */
+      options: [],
+      defaultProps: {
+        value: 'id',
+        label: 'name',
+        expandTrigger: 'hover',
+        multiple: true,
+        checkStrictly: true,
+      },
     }
   },
-
   created() {
     this.getGoodsList()
+    this.getBookClassification()
   },
   methods: {
     async getGoodsList() {
       const { data: res } = await this.$http.get('/book/findAll')
       this.bookList = res.data
-      console.log(res.code)
+    },
+    async getBookClassification() {
+      const { data: res } = await this.$http.get(
+        'booksClass/selectAllWithBooksClass'
+      )
+      if (res.code == 0) {
+        this.options = res.data
+      } else {
+        this.$message.error('获取书本分类失败')
+      }
     },
     // 监听修改用户对话框的关闭事件
     editDialogClosed() {
@@ -425,6 +452,10 @@ export default {
       this.addDialogVisible = false
       // 重新获取用户列表数据
       this.getGoodsList()
+    },
+
+    handleChange(value) {
+      console.log(value)
     },
   },
 }

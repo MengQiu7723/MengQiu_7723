@@ -39,59 +39,53 @@
 </template>
 
 <script>
-let id = 1000;
+let id = 1000
 export default {
   data() {
-    const data = [];
+    const data = []
     return {
       data: JSON.parse(JSON.stringify(data)),
-
-      //  BookListID:[
-      //   {
-      //   id:'',
-      //   name:''
-      // }
-      // ],
-      id: "",
+      id: '',
       defaultProps: {
-        children: "children",
-        label: "name",
+        children: 'children',
+        label: 'name',
       },
-    };
+    }
   },
   created() {
-    this.getBookTreeList();
+    this.getBookTreeList()
   },
   methods: {
-    iseEdit() {},
+    iseEdit() {
+      return 'sdf'
+    },
+
     handleNodeClick(data) {
-      console.log(data);
+      console.log(data)
     },
     async getBookTreeList() {
       //get请求
-      const res = await this.$http.get("booksClass/selectAllWithBooksClass");
-      var result = res.data;
-      console.log(res);
-      console.log(result);
-      if (result.code == 0) {
-        this.data = result.data;
-        // this.BookListID = result.data.id;
-      } else if (result.code == 1) {
-        this.$message.error(result.msg + "，登录失败！");
+      const { data: res } = await this.$http.get(
+        'booksClass/selectAllWithBooksClass'
+      )
+      if (res.code == 0) {
+        this.data = res.data
+      } else if (res.code == 1) {
+        this.$message.error(res.msg + '，登录失败！')
       }
     },
     append(data) {
-      const newChild = { id: id++, label: iseEdit(), children: [] };
+      const newChild = { id: id++, label: 'testtest', children: [] }
       if (!data.children) {
-        this.$set(data, "children", []);
+        this.$set(data, 'children', [])
       }
-      data.children.push(newChild);
+      data.children.push(newChild)
     },
     remove(node, data) {
-      const parent = node.parent;
-      const children = parent.data.children || parent.data;
-      const index = children.findIndex((d) => d.id === data.id);
-      children.splice(index, 1);
+      const parent = node.parent
+      const children = parent.data.children || parent.data
+      const index = children.findIndex((d) => d.id === data.id)
+      children.splice(index, 1)
     },
     renderContent(h, { node, data }) {
       return (
@@ -114,10 +108,10 @@ export default {
             </el-button>
           </span>
         </span>
-      );
+      )
     },
   },
-};
+}
 </script>
 
 <style lang="less" scoped>
