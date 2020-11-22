@@ -112,7 +112,7 @@ export default {
           id: 104,
           authName: '服务管理',
           children: [
-            { id: 144, authName: '公告箮理', path: 'announcement', role: 0 },
+            { id: 144, authName: '公告箮理', path: 'announcement', role: 2 },
             { id: 145, authName: '广告管理', path: 'advertising', role: 0 },
             { id: 146, authName: '皮肤管理', path: 'skin', role: 0 },
           ],
