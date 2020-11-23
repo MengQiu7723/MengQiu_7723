@@ -161,20 +161,16 @@ export default {
     var checkEmail = (rule, value, cb) => {
       // 验证邮箱的正则表达式
       const regEmail = /^([a-zA-Z0-9_-])+@([a-zA-Z0-9_-])+(\.[a-zA-Z0-9_-])+/
-
       if (regEmail.test(value)) {
         // 合法的邮箱
         return cb()
       }
-
       cb(new Error('请输入合法的邮箱'))
     }
-
     // 验证手机号的规则
     var checkMobile = (rule, value, cb) => {
       // 验证手机号的正则表达式
       const regMobile = /^(0|86|17951)?(13[0-9]|15[012356789]|17[678]|18[0-9]|14[57])[0-9]{8}$/
-
       if (regMobile.test(value)) {
         return cb()
       }
@@ -190,24 +186,7 @@ export default {
         pagesize: 5,
       },
       //获取的用户列表
-      userList: [
-        /*  {
-          id: 1,
-          userName: 'admin',
-          email: '20201013@gzs.com',
-          mobile: '202010131036',
-          role_name: '炒鸡管理员',
-          mg_state: true,
-        },
-        {
-          id: 2,
-          userName: 'tony',
-          email: '20201013@gzs.com',
-          mobile: '202010131036',
-          role_name: '炒蛋管理员',
-          mg_state: false,
-        }, */
-      ],
+      userList: [],
       //数据总数
       total: 0,
       //控制对话框的显示与隐藏
