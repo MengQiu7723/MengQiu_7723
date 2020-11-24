@@ -53,23 +53,13 @@
             <el-menu-item
               :index="'/' + subItem.path"
               v-for="subItem in item.children"
+              v-if="subItem.role == role || subItem.role == 2"
               :key="subItem.id"
               @click="saveNavState('/' + subItem.path)"
             >
               {{ subItem.authName }}
             </el-menu-item>
             <!-- 二级菜单结束 -->
-
-            <!-- 二级菜单 
-            <el-submenu :index="subItem.id+''"
-                        v-for="subItem in item.children"
-                        :key="subItem.id">
-              二级菜单的模板区域
-              <template slot="title">{{subItem.authName}}</template>
-              二级菜单的可选项
-              <el-menu-item index="1-4-1">{{}}</el-menu-item>
-            </el-submenu>
-            -->
           </el-submenu>
           <!-- 一级菜单结束 -->
         </el-menu>
@@ -90,47 +80,49 @@ export default {
   name: 'home',
   data() {
     return {
+      role: localStorage.getItem('role'),
       //默认不全屏
       isFullscreen: false,
       //左侧菜单数据
+      /* 0代表管理员，1代表商家，2代表管理员和商家共有部分 */
       menulist: [
         {
           id: 101,
           authName: '用户管理',
           children: [
-            { id: 111, authName: '管理员列表', path: 'adminusers' },
-            { id: 112, authName: '用户列表', path: 'userlist' },
-            { id: 113, authName: '商家列表', path: 'businessmanList' },
+            { id: 111, authName: '管理员列表', path: 'adminusers', role: 0 },
+            { id: 112, authName: '用户列表', path: 'userlist', role: 0 },
+            { id: 113, authName: '商家列表', path: 'businessmanList', role: 0 },
           ],
         },
         {
           id: 102,
           authName: '商品管理',
           children: [
-            { id: 122, authName: '商品列表', path: 'product' },
-            { id: 123, authName: '商品分类', path: 'product02' },
+            { id: 122, authName: '商品列表', path: 'product', role: 2 },
+            { id: 123, authName: '商品分类', path: 'product02', role: 1 },
           ],
         },
         {
           id: 103,
           authName: '订单管理',
-          children: [{ id: 133, authName: '订单列表', path: 'order' }],
+          children: [{ id: 133, authName: '订单列表', path: 'order', role: 2 }],
         },
         {
           id: 104,
           authName: '服务管理',
           children: [
-            { id: 144, authName: '公告箮理', path: 'announcement' },
-            { id: 145, authName: '广告管理', path: 'advertising' },
-            { id: 146, authName: '皮肤管理', path: 'skin' },
+            { id: 144, authName: '公告箮理', path: 'announcement', role: 2 },
+            { id: 145, authName: '广告管理', path: 'advertising', role: 0 },
+            { id: 146, authName: '皮肤管理', path: 'skin', role: 0 },
           ],
         },
         {
           id: 105,
           authName: '统计管理',
           children: [
-            { id: 155, authName: '商品销售排行', path: 'rank' },
-            { id: 156, authName: '商品销售图表', path: 'chart' },
+            { id: 155, authName: '商品销售排行', path: 'rank', role: 2 },
+            { id: 156, authName: '商品销售图表', path: 'chart', role: 2 },
           ],
         },
       ],
@@ -141,7 +133,21 @@ export default {
   created() {
     this.activePath = window.sessionStorage.getItem('activePath')
   },
+  /* computed: {
+    evenMenulist: function () {
+      return this.menulist.filter(function (number) {
+        return true
+      })
+    },
+  }, */
   methods: {
+    /* 角色分配内容 start
+    even: function (numbers) {
+      return numbers.filter(function (number) {
+        return number % 2 === 0
+      })
+    },
+     角色分配内容 end*/
     //保存链接的激活状态
     saveNavState(activePath) {
       window.sessionStorage.setItem('activePath', activePath)
