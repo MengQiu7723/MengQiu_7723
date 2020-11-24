@@ -46,7 +46,8 @@ import {
   Radio,
   Loading,
   DatePicker,
-  RadioGroup
+  RadioGroup,
+  Alert,
 } from 'element-ui'
 
 
@@ -95,6 +96,7 @@ Vue.use(Radio)
 Vue.use(Loading)
 Vue.use(DatePicker)
 Vue.use(RadioGroup)
+Vue.use(Alert)
 Vue.prototype.$message = Message
 Vue.prototype.$confirm = MessageBox.confirm
 

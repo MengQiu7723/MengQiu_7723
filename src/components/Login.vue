@@ -116,7 +116,7 @@ export default {
           },
         })
         if (res.code == 0) {
-          // window.sessionStorage.setItem('token', res.data)
+          window.sessionStorage.setItem('token', res.data)
           window.localStorage.setItem('role', 1)
           this.$message.success('登录成功')
           this.$router.push('/home')
