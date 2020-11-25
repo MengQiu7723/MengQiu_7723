@@ -45,7 +45,8 @@ import {
   Link,
   Radio,
   DatePicker,
-  RadioGroup
+  RadioGroup,
+  InputNumber
 } from 'element-ui'
 
 
@@ -93,6 +94,7 @@ Vue.use(Link)
 Vue.use(Radio)
 Vue.use(DatePicker)
 Vue.use(RadioGroup)
+Vue.use(InputNumber)
 Vue.prototype.$message = Message
 Vue.prototype.$confirm = MessageBox.confirm
 
