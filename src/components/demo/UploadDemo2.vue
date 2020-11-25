@@ -1,58 +1,183 @@
 <template>
-  <div>
-    <el-upload action="#" list-type="picture-card" :auto-upload="false">
-      <i slot="default" class="el-icon-plus"></i>
-      <div slot="file" slot-scope="{ file }">
-        <img class="el-upload-list__item-thumbnail" :src="file.url" alt="" />
-        <span class="el-upload-list__item-actions">
-          <span
-            class="el-upload-list__item-preview"
-            @click="handlePictureCardPreview(file)"
-          >
-            <i class="el-icon-zoom-in"></i>
-          </span>
-          <span
-            v-if="!disabled"
-            class="el-upload-list__item-delete"
-            @click="handleDownload(file)"
-          >
-            <i class="el-icon-download"></i>
-          </span>
-          <span
-            v-if="!disabled"
-            class="el-upload-list__item-delete"
-            @click="handleRemove(file)"
-          >
-            <i class="el-icon-delete"></i>
+  <div class="custom-tree-container">
+    <div class="block">
+      <p>使用 render-content</p>
+      <el-tree
+        :data="data"
+        :props="defaultProps"
+        show-checkbox
+        node-key="id"
+        default-expand-all
+        :expand-on-click-node="false"
+        :render-content="renderContent"
+      >
+      </el-tree>
+    </div>
+    <div class="block">
+      <p>使用 scoped slot</p>
+      <el-tree
+        :data="data"
+        :props="defaultProps"
+        show-checkbox
+        node-key="id"
+        default-expand-all
+        :expand-on-click-node="false"
+      >
+        <span class="custom-tree-node" slot-scope="{ node, data }">
+          <span>{{ node.label }}</span>
+          <span>
+            <el-button type="text" size="mini" @click="() => append(data)">
+              Append
+            </el-button>
+            <el-button
+              type="text"
+              size="mini"
+              @click="() => remove(node, data)"
+            >
+              Delete
+            </el-button>
           </span>
         </span>
-      </div>
-    </el-upload>
-    <el-dialog :visible.sync="dialogVisible">
-      <img width="100%" :src="dialogImageUrl" alt="" />
-    </el-dialog>
+      </el-tree>
+    </div>
   </div>
 </template>
+
 <script>
+let id = 1000
+
 export default {
   data() {
+    const data = [
+      /* {
+        id: 1,
+        label: '一级 1',
+        children: [
+          {
+            id: 4,
+            label: '二级 1-1',
+            children: [
+              {
+                id: 9,
+                label: '三级 1-1-1',
+              },
+              {
+                id: 10,
+                label: '三级 1-1-2',
+              },
+            ],
+          },
+        ],
+      },
+      {
+        id: 2,
+        label: '一级 2',
+        children: [
+          {
+            id: 5,
+            label: '二级 2-1',
+          },
+          {
+            id: 6,
+            label: '二级 2-2',
+          },
+        ],
+      },
+      {
+        id: 3,
+        label: '一级 3',
+        children: [
+          {
+            id: 7,
+            label: '二级 3-1',
+          },
+          {
+            id: 8,
+            label: '二级 3-2',
+          },
+        ],
+      }, */
+    ]
     return {
-      dialogImageUrl: '',
-      dialogVisible: false,
-      disabled: false,
+      data: JSON.parse(JSON.stringify(data)),
+      data: JSON.parse(JSON.stringify(data)),
+      defaultProps: {
+        // 默认设置
+        children: 'children',
+        label: 'name',
+      },
     }
   },
+
   methods: {
-    handleRemove(file) {
-      console.log(file)
+    isEdit() {
+      
+      return (<input />)
     },
-    handlePictureCardPreview(file) {
-      this.dialogImageUrl = file.url
-      this.dialogVisible = true
+    append(data) {
+      const newChild = { id: id++, name: this.isEdit(), children: [] }
+      // 判断字段是否存在
+      if (!data.children) {
+        this.$set(data, 'children', [])
+      }
+      data.children.push(newChild)
     },
-    handleDownload(file) {
-      console.log(file)
+
+    remove(node, data) {
+      const parent = node.parent
+      const children = parent.data.children || parent.data
+      const index = children.findIndex((d) => d.id === data.id)
+      children.splice(index, 1)
     },
+
+    renderContent(h, { node, data, store }) {
+      return (
+        <span class="custom-tree-node">
+          <span>{node.label}</span>
+          <span>
+            <el-button
+              size="mini"
+              type="text"
+              on-click={() => this.append(data)}
+            >
+              Append
+            </el-button>
+            <el-button
+              size="mini"
+              type="text"
+              on-click={() => this.remove(node, data)}
+            >
+              Delete
+            </el-button>
+          </span>
+        </span>
+      )
+    },
+    async getBookTreeList() {
+      //get请求
+      const { data: res } = await this.$http.get(
+        'booksClass/selectAllWithBooksClass'
+      )
+      this.data = res.data
+    },
+  },
+  created() {
+    this.getBookTreeList()
   },
 }
 </script>
+
+<style>
+.custom-tree-container {
+  width: 800px;
+  margin: 0 auto;
+}
+.custom-tree-node {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 14px;
+  padding-right: 8px;
+}
+</style>

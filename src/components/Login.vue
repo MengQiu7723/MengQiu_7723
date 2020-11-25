@@ -63,12 +63,6 @@ export default {
         // 验证用户名是否合法
         adminName: [
           { required: true, message: '请输入登录名称', trigger: 'blur' },
-          {
-            min: 3,
-            max: 10,
-            message: '长度在 3 到 10 个字符',
-            trigger: 'blur',
-          },
         ],
         // 验证密码是否合法
         password: [
@@ -122,7 +116,7 @@ export default {
           },
         })
         if (res.code == 0) {
-          // window.sessionStorage.setItem('token', res.data)
+          window.sessionStorage.setItem('token', res.data)
           window.localStorage.setItem('role', 1)
           this.$message.success('登录成功')
           this.$router.push('/home')

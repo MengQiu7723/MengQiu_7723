@@ -44,6 +44,7 @@ import {
   DropdownItem,
   Link,
   Radio,
+  Loading,
   DatePicker,
   RadioGroup,
   InputNumber
@@ -92,6 +93,7 @@ Vue.use(DropdownMenu)
 Vue.use(DropdownItem)
 Vue.use(Link)
 Vue.use(Radio)
+Vue.use(Loading)
 Vue.use(DatePicker)
 Vue.use(RadioGroup)
 Vue.use(InputNumber)
