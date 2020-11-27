@@ -193,7 +193,7 @@
       </el-form>
       <!-- 底部区域 -->
       <span slot="footer" class="dialog-footer">
-        <el-button @click="addDialogVisible = false">取 消</el-button>
+        <el-button @click="handleClose">取 消</el-button>
         <el-button type="primary" @click="addBook()">确 定</el-button>
       </span>
     </el-dialog>
@@ -320,7 +320,25 @@ export default {
     },
     handleClose() {
       this.addDialogVisible = false
-      // this.$refs.addFormRef.resetFields()
+       this.bookInfo = {
+        cid: '', //分类id int
+        bookName: '', //书名',
+        publisher: '', //出版社',
+        author: '', //作者名称',
+        price: '', //价格 float
+        introduce: '', //内容介绍',
+        ISBN: '', //书本编号' string
+        imagesUrl: '', //书本封面（图片）',
+        modifyCategory: '', //暂时用不到',
+        ggct: '', //暂时用不到',
+        returnGoods: '', //暂时用不到',
+        invoice: '', //暂时用不到',
+        promise: '', //暂时用不到',
+        region: '', //发货地',
+        specialOffer: '', //特价',
+        imagesDetails: [],
+        imagesThumbnails: [],
+      }
     },
 
     /* 
@@ -357,7 +375,18 @@ export default {
     移除文件钩子
     */
     handleRemove(file, fileList) {
+      var length = this.bookInfo.imagesDetails.length
+      var index = 0
       console.log(file, fileList)
+      debugger
+      for (var i = 0; i < length; i++) {
+        // debugger
+        if (this.bookInfo.imagesDetails[i].uid == file.uid) {
+          index = i
+          break
+        }
+      }
+      this.bookInfo.imagesDetails.splice(index, 1)
     },
     /* 
     点击文件时钩子
@@ -447,6 +476,9 @@ export default {
 </script>
 
 <style lang="less" scoped>
+[v-cloak] {
+  display: none;
+}
 .avatar {
   widows: 100%;
   height: 100%;

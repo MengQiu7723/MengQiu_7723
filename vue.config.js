@@ -1,5 +1,6 @@
 // Axios跨域代理配置
 module.exports = {
+
   devServer: {
     proxy: {
       "/api": {
@@ -21,5 +22,20 @@ module.exports = {
       },
     }
   },
-  lintOnSave: false
+  lintOnSave: false,
+  publicPath: './',
+  configureWebpack: {
+    resolve: {
+      alias: {
+        'assets': '@/assets',
+        // 'common': '@/common',
+        'components': '@/components',
+        // 'network': '@/network',
+        // 'views': '@/views',
+        'plugins': '@/plugins',
+        'router': '@/router',
+        'styles': '@/styles'
+      }
+    }
+  }
 };

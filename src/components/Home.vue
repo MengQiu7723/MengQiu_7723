@@ -100,7 +100,7 @@ export default {
           authName: '商品管理',
           children: [
             { id: 122, authName: '商品列表', path: 'product', role: 2 },
-            { id: 123, authName: '商品分类', path: 'product02', role: 1 },
+            { id: 123, authName: '商品分类', path: 'product02', role: 0 },
           ],
         },
         {
