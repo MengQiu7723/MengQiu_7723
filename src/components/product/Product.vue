@@ -39,7 +39,8 @@
         <el-table-column
           label="内容介绍"
           prop="introduce"
-          min-width="85%"
+          min-width="85"
+          show-overflow-tooltip
         ></el-table-column>
         <el-table-column label="书本编号" prop="ISBN"></el-table-column>
 
@@ -281,10 +282,17 @@ export default {
         imagesThumbnails: [],
       }
     },
+    /* 获取书藉列表 */
     async getGoodsList() {
       const { data: res } = await this.$http.get('/book/findAll')
-      this.bookList = res.data
+      if (res.code == 0) {
+        this.bookList = res.data
+        console.log(res.data)
+      } else {
+        this.$message.error('请求书本列表失败')
+      }
     },
+    /* 获取书藉分类 */
     async getBookClassification() {
       const { data: res } = await this.$http.get(
         'booksClass/selectAllWithBooksClass'
@@ -320,7 +328,7 @@ export default {
     },
     handleClose() {
       this.addDialogVisible = false
-       this.bookInfo = {
+      this.bookInfo = {
         cid: '', //分类id int
         bookName: '', //书名',
         publisher: '', //出版社',
@@ -352,11 +360,11 @@ export default {
 
     beforeAvatarUpload(file) {
       // console.log(file)
-      const isJPG = file.type === 'image/jpeg'
+      const isJPG = file.type === 'image/jpeg' || 'image/png'
       const isLt2M = file.size / 1024 / 1024 < 2
 
       if (!isJPG) {
-        this.$message.error('上传头像图片只能是 JPG 格式!')
+        this.$message.error('上传头像图片只能是 JPG 格式或 PNG 格式!')
       }
       if (!isLt2M) {
         this.$message.error('上传头像图片大小不能超过 2MB!')
@@ -378,9 +386,7 @@ export default {
       var length = this.bookInfo.imagesDetails.length
       var index = 0
       console.log(file, fileList)
-      debugger
       for (var i = 0; i < length; i++) {
-        // debugger
         if (this.bookInfo.imagesDetails[i].uid == file.uid) {
           index = i
           break

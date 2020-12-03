@@ -98,7 +98,7 @@ export default {
       NODE_KEY: 'id', // id对应字段
       MAX_LEVEL: 3, // 设定最大层级
       NODE_ID_START: 0, // 新增节点id，逐次递减
-      NODE_LE : 'level',
+      NODE_LE: 'level',
       startId: null,
       defaultProps: {
         // 默认设置
@@ -119,14 +119,14 @@ export default {
     this.getBookTreeList()
   },
   methods: {
+    /* 请求所有分类接口 */
     async getBookTreeList() {
-      //get请求
       const { data: res } = await this.$http.get(
         'booksClass/selectAllWithBooksClass'
       )
       this.setTree = res.data
     },
-
+    /* 删除接口 */
     async delete(id) {
       const { data: res } = await this.$http.delete('booksClass/delete', {
         params: { id: id },
@@ -139,7 +139,7 @@ export default {
     },
     handleDelete(_node, _data) {
       // 删除节点
-      console.log(_node, _data)
+      console.log(_node, _data, '删除节点')
       // 判断是否存在子节点
       if (_data.children && _data.children.length !== 0) {
         this.$message.error('此节点有子级，不可删除！')
@@ -172,24 +172,42 @@ export default {
         _data[this.NODE_KEY] < this.NODE_ID_START ? DeletOprate() : ConfirmFun()
       }
     },
-    /* 编辑完执行 */
-    handleInput(_node, _data) {
+    /* 编辑后执行 */
+    async handleInput(_node, _data) {
       // 修改节点
-      console.log(_node, _data)
-      const { data: res } = this.$http.post('booksClass/update', {
-        id: _data.id,
-        name: _data.name,
-        pid: _data.pid,
-        level: _data.level,
-      })
+      console.log(_node, _data, 'ID:', _data.id, '修改节点')
       // 退出编辑状态
       if (_node.isEdit) {
         this.$set(_node, 'isEdit', false)
       }
+      if (_data.id < 0) {
+        /* 插入 */
+        const { data: res } = await this.$http.post('booksClass/insert', {
+          // id: _data.id,
+          name: _data.name,
+          pid: _data.pid,
+          level: _data.level,
+        })
+        if (res.code != 0) {
+          this.$message.error(res.msg)
+        }
+      } else {
+        /* 更新 */
+        const { data: res } = await this.$http.post('booksClass/update', {
+          id: _data.id,
+          name: _data.name,
+          pid: _data.pid,
+          level: _data.level,
+        })
+        if (res.code != 0) {
+          this.$message.error(res.msg)
+        }
+      }
+      this.getBookTreeList()
     },
     handleEdit(_node, _data) {
       // 编辑节点
-      console.log(_node, _data)
+      console.log(_node, _data, '编辑节点')
       // 设置编辑状态
       if (!_node.isEdit) {
         this.$set(_node, 'isEdit', true)
@@ -203,7 +221,7 @@ export default {
     },
     async handleAdd(_node, _data) {
       // 新增节点
-      console.log(_node, _data)
+      console.log(_node, _data, '新增节点')
       // 判断层级
       if (_node.level >= this.MAX_LEVEL) {
         this.$message.warning('当前已达到' + this.MAX_LEVEL + '级，无法新增！')
@@ -212,7 +230,7 @@ export default {
       // 参数修改
       let obj = JSON.parse(JSON.stringify(this.initParam)) // copy参数
       obj.pid = _data[this.NODE_KEY] // 父id
-      obj.level = _data[this.NODE_LE]+1
+      obj.level = _data[this.NODE_LE] + 1
       obj[this.NODE_KEY] = --this.startId // 节点id：逐次递减id
       // 判断字段是否存在
       if (!_data.children) {
@@ -224,12 +242,8 @@ export default {
       if (!_node.expanded) {
         _node.expanded = true
       }
-      // console.log(obj);
-      // console.log(_data.level);
-
       // 输入框聚焦
       this.$nextTick(() => {
-     
         let child = _node.childNodes[_node.childNodes.length - 1]
         if (!child.isEdit) {
           this.$set(child, 'isEdit', true)
@@ -239,9 +253,7 @@ export default {
             this.$refs['slotTreeInput' + obj[this.NODE_KEY]].$refs.input.focus()
           }
         })
-      
       })
-
       // const { data: res } = await this.$http.post('booksClass/insert', {
       //   name: obj.name,
       //   pid: obj.pid,
@@ -314,6 +326,12 @@ export default {
         }
       }
     }
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-size: 14px;
+    padding-right: 8px;
   }
   // 高亮显示按钮
   .is-current {
