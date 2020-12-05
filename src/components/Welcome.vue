@@ -45,8 +45,9 @@
         >
           <el-col :span="8">
             <el-row type="flex" justify="center" align="middle">
-              <el-col :span="1" :offset="1" align="middle"
-                ><el-checkbox></el-checkbox>
+              <el-col :span="1" :offset="1" align="middle">
+                <!-- 每个商品前的选择框 -->
+                <el-checkbox :key="subIndex.id"></el-checkbox>
               </el-col>
               <el-col :span="11" align="middle">
                 <img :src="subIndex.imagesUrl" height="120px" />
@@ -60,7 +61,11 @@
               <el-col align="middle">
                 <el-input-number
                   v-model="subIndex.number"
-                  @change="handleChange"
+                  @change="
+                    (val, oldVal) => {
+                      handleChange(val, oldVal, subIndex.id)
+                    }
+                  "
                   :min="1"
                   :max="99999"
                   size="mini"
@@ -79,6 +84,43 @@
       </div>
     </div>
     <!-- END -->
+    <!-- 表底 -->
+    <el-row style="width: 945px; min-height: 36px" type="flex" align="middle">
+      <el-col :span="8">
+        <el-checkbox
+          :indeterminate="isIndeterminate"
+          v-model="checkAll"
+          @change="handleCheckAllChange"
+          >全选</el-checkbox
+        >
+      </el-col>
+      <el-col :span="16">
+        <el-row type="flex" justify="end" align="middle">
+          <el-col :span="6" align="middle">
+            <span
+              >已选商品<strong>&nbsp;{{ sumNumber }}&nbsp;</strong>件</span
+            ></el-col
+          >
+          <el-col :span="8" align="middle">
+            <span
+              >合计（不计运费）：<strong> ￥{{ sumPrice }}</strong></span
+            ></el-col
+          >
+          <el-col :span="4" justify="center" align="middle">
+            <div
+              style="
+                background: #ff4301;
+                width: 100px;
+                height: 50px;
+                line-height: 50px;
+              "
+            >
+              去结算
+            </div></el-col
+          >
+        </el-row>
+      </el-col>
+    </el-row>
   </div>
 </template>
   
@@ -158,7 +200,9 @@ export default {
       /* 多选表格 START*/
       tableData: [],
       tableDataList: [],
-      multipleSelection: ['上海', '北京', '广州', '深圳'],
+      tableDataListList: [],
+      sumNumber: 0,
+      sumPrice: 0,
       checkAll: false,
       checkedShops: [],
       shopOptions: [],
@@ -179,8 +223,7 @@ export default {
   },
   created() {
     this.getShoppingCart()
-    console.log(this.multipleSelection)
-    console.log(this.shopOptions)
+    // this.handleChange()
   },
   methods: {
     /* 购物车 */
@@ -197,17 +240,25 @@ export default {
       if (res.code == 1) {
         this.$message('获取失败')
       }
-      // console.log(typeof this.shopOptions)
-      /* 因为没有用到el-table，所以下面的内容暂时用不上 */
-      for (var i in this.tableData) {
-        console.log(i)
-        console.log(this.tableData[i])
+
+      for (let i in this.tableData) {
+        /* console.log(i)
+        console.log(this.tableData[i]) */
         this.shopOptions.push(i)
         this.tableDataList.push(this.tableData[i])
       }
-      // for (var j in this.tableDataList) {
-      //   console.log(this.tableDataList[j])
-      // }
+
+      for (let i in this.tableDataList) {
+        for (let j in this.tableDataList[i]) {
+          this.tableDataListList.push(this.tableDataList[i][j])
+        }
+      }
+      for (let i in this.tableDataListList) {
+        this.sumNumber = this.sumNumber + this.tableDataListList[i].number
+        this.sumPrice =
+          this.sumPrice +
+          this.tableDataListList[i].number * this.tableDataListList[i].price
+      }
     },
     /* 多选 */
     handleCheckAllChange(val) {
@@ -220,8 +271,27 @@ export default {
       this.isIndeterminate =
         checkedCount > 0 && checkedCount < this.shopOptions.length
     },
-    handleChange(value) {
-      console.log(value)
+    /* 计算器 */
+    handleChange(currentValue, oldValue, id) {
+      let index = 0
+      console.log('当前数量：', currentValue, '之前数数', oldValue, 'ID', id)
+      /* 此处拿到发生了变化的数据 */
+      for (let i in this.tableDataListList) {
+        if (this.tableDataListList[i].id == id) {
+          index = i
+          break
+        }
+      }
+      console.log(this.tableDataListList[index].number)
+      /* 原数量：原数据 = 当前数量（currentValue） */
+      this.tableDataListList[index].number = currentValue
+      /* 总组量：原有的基础上 + 变化后的数量（currentValue - oldValue） */
+      this.sumNumber = this.sumNumber + currentValue - oldValue
+      /* 总价格：总价格 - 变化前占有的格格 + 变化后占有的价格*/
+      this.sumPrice =
+        this.sumPrice -
+        this.tableDataListList[index].price * oldValue +
+        this.tableDataListList[index].price * currentValue
     },
     async deleteById(id) {
       const { data: res } = await this.$http.post('deleteById', {
