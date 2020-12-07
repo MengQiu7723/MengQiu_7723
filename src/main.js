@@ -3,6 +3,7 @@ import './plugins/axios'
 import App from './App.vue'
 import router from './router'
 import axios from 'axios'
+// axios.defaults.withCredentials = true
 import './plugins/element.js'
 // 原来的引用路径
 import 'element-ui/lib/theme-chalk/index.css'
@@ -18,8 +19,6 @@ import 'quill/dist/quill.bubble.css'
 import Editor from './components/back/service/Editor'
 Vue.component("Editor", Editor)
 
-
-
 // 导入全局样式表
 import './assets/css/global.css'
 
@@ -30,7 +29,8 @@ Vue.config.productionTip = false
 Vue.use(VueQuillEditor);
 
 // 配置请求的根路径
-axios.defaults.baseURL = '/api/'
+axios.defaults.baseURL = '/api'
+// axios.defaults.baseURL = 'http://127.0.0.1:8080/'
 
 // 将富文本编辑器，注册为全局可用的组件
 Vue.use(VueQuillEditor)
@@ -38,7 +38,7 @@ Vue.use(VueQuillEditor)
 // 配置axios请求拦截器
 axios.interceptors.request.use((config) => {
   //Token请求头
-  // config.headers.Authorization = window.sessionStorage.getItem('token');
+  config.headers.Authorization = window.sessionStorage.getItem('token');
   config.headers.Token = window.sessionStorage.getItem('token');
   return config
 });

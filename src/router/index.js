@@ -28,6 +28,8 @@ import Up2 from '../components/demo/UploadDemo2.vue'
 Vue.use(Router)
 
 const router = new Router({
+  // mode: "history",
+  mode: "hash",
   routes: [
     { path: '/', redirect: '/login' },
     { path: '/login', component: Login },
