@@ -66,6 +66,7 @@
                       handleChange(val, oldVal, subIndex.id)
                     }
                   "
+                  @blur="blur()"
                   :min="1"
                   :max="99999"
                   size="mini"
@@ -282,7 +283,7 @@ export default {
           break
         }
       }
-      console.log(this.tableDataListList[index].number)
+      console.log('更改后的原数据：', this.tableDataListList[index].number)
       /* 原数量：原数据 = 当前数量（currentValue） */
       this.tableDataListList[index].number = currentValue
       /* 总组量：原有的基础上 + 变化后的数量（currentValue - oldValue） */

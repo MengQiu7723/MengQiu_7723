@@ -24,7 +24,11 @@ import Td from '../components/demo/TreeDemo.vue'
 import Up from '../components/demo/UploadDemo.vue'
 import Up2 from '../components/demo/UploadDemo2.vue'
 
+const originalPush = Router.prototype.push
 
+Router.prototype.push = function push (location) {
+  return originalPush.call(this, location).catch(err => err)
+}
 Vue.use(Router)
 
 const router = new Router({

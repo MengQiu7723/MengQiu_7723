@@ -22,6 +22,8 @@ Vue.component("Editor", Editor)
 // 导入全局样式表
 import './assets/css/global.css'
 
+import store from './store'
+
 //导入Container组件
 
 
@@ -46,5 +48,6 @@ Vue.prototype.$http = axios
 
 new Vue({
   router,
-  render: (h) => h(App),
+  store,
+  render: (h) => h(App)
 }).$mount('#app')
