@@ -140,18 +140,18 @@ export default {
 <style lang="less" scoped>
 .login_container {
   // background-color: #2b4b6b;
-  background: url('../assets/bg.jpg');
+  background: url('https://api.xygeng.cn/Bing/');
   background-attachment: fixed;
   background-repeat: no-repeat;
-  background-position: 0% 5%;
-  background-size: 101% 101%;
+  // background-position: 0% 5%;
+  background-size: 100%;
   height: 100%;
 }
 
 .login_box {
   width: 450px;
   height: 300px;
-  background-color: #ffffff;
+  background-color: rgba(255, 255, 255, 0.6);
   border-radius: 3px;
   position: absolute;
   left: 50%;

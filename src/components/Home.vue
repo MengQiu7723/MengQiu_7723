@@ -3,7 +3,7 @@
     <!-- 头部区域 -->
     <el-header>
       <div>
-        <!-- <img src="../assets/heima.png" alt=""> -->
+        <img src="../assets/logo.png" alt="" />
         <span>35后台管理系统</span>
       </div>
       <div class="good">
@@ -44,7 +44,7 @@
             <!-- 一级菜单的模板区域 -->
             <template slot="title">
               <!-- 图标 -->
-              <i class="el-icon-location"></i>
+              <i :class="iconsObj[item.id]"></i>
               <!-- 文本 -->
               <span>{{ item.authName }}</span>
             </template>
@@ -57,6 +57,7 @@
               :key="subItem.id"
               @click="saveNavState('/' + subItem.path)"
             >
+              <i class="el-icon-menu"></i>
               {{ subItem.authName }}
             </el-menu-item>
             <!-- 二级菜单结束 -->
@@ -128,6 +129,14 @@ export default {
       ],
       //被激活的链接地址
       activePath: '',
+      /*菜单列表图标 */
+      iconsObj: {
+        101: 'el-icon-user-solid',
+        102: 'el-icon-s-shop',
+        103: 'el-icon-tickets',
+        104: 'el-icon-service',
+        105: 'el-icon-s-marketing',
+      },
     }
   },
   created() {
@@ -194,8 +203,12 @@ export default {
   > div {
     display: flex;
     align-items: center;
+    margin-left: 15px;
+    img {
+      width: 25px;
+    }
     span {
-      margin-left: 15px;
+      margin-left: 5px;
     }
   }
 }

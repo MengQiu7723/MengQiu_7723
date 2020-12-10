@@ -1,6 +1,6 @@
 <template>
   <div>
-    <!-- 表头 -->
+    <!-- 表头
     <el-row
       style="width: 945px; min-height: 36px; background: #ccc"
       type="flex"
@@ -23,7 +23,7 @@
         </el-row>
       </el-col>
     </el-row>
-    <!-- START -->
+    START
     <div v-for="(index, i) in tableData" :key="index.i">
       <el-row>
         <el-col :span="24">
@@ -46,7 +46,7 @@
           <el-col :span="8">
             <el-row type="flex" justify="center" align="middle">
               <el-col :span="1" :offset="1" align="middle">
-                <!-- 每个商品前的选择框 -->
+                每个商品前的选择框
                 <el-checkbox :key="subIndex.id"></el-checkbox>
               </el-col>
               <el-col :span="11" align="middle">
@@ -84,8 +84,8 @@
         </el-row>
       </div>
     </div>
-    <!-- END -->
-    <!-- 表底 -->
+    END
+    表底
     <el-row style="width: 945px; min-height: 36px" type="flex" align="middle">
       <el-col :span="8">
         <el-checkbox
@@ -121,7 +121,7 @@
           >
         </el-row>
       </el-col>
-    </el-row>
+    </el-row> -->
   </div>
 </template>
   
@@ -229,10 +229,26 @@ export default {
   methods: {
     /* 购物车 */
     async getShoppingCart() {
-      const { data: res } = await this.$http.get('shoppingCart/findByCart', {
-        /* 请求参数：id */
-        params: { uid: 3 },
-      })
+      const { data: res } = await this.$http
+        .get('shoppingCart/findByCart')
+        .catch(function (error) {
+          if (error.response) {
+            // The request was made and the server responded with a status code
+            // that falls out of the range of 2xx
+            console.log(error.response.data)
+            console.log(error.response.status)
+            console.log(error.response.headers)
+          } else if (error.request) {
+            // The request was made but no response was received
+            // `error.request` is an instance of XMLHttpRequest in the browser and an instance of
+            // http.ClientRequest in node.js
+            console.log(error.request)
+          } else {
+            // Something happened in setting up the request that triggered an Error
+            console.log('Error', error.message)
+          }
+          console.log(error.config)
+        })
       // console.log(res.data)
       if (res.code == 0) {
         this.$message.success('获取成功')
