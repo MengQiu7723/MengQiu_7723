@@ -42,7 +42,7 @@
           min-width="85"
           show-overflow-tooltip
         ></el-table-column>
-        <el-table-column label="书本编号" prop="ISBN"></el-table-column>
+        <el-table-column label="书本编号" prop="isbn"></el-table-column>
 
         <el-table-column label="操作">
           <template slot-scope="scope">
@@ -77,7 +77,7 @@
 
     <!-- 添加书本的对话框 -->
     <el-dialog
-      title="添加商品"
+      title="商品信息"
       :visible.sync="addDialogVisible"
       width="70%"
       :before-close="handleClose"
@@ -115,8 +115,8 @@
             <el-form-item label="出版社" prop="publisher">
               <el-input v-model="bookInfo.publisher"></el-input>
             </el-form-item>
-            <el-form-item label="书本编号" prop="ISBN">
-              <el-input v-model="bookInfo.ISBN"></el-input>
+            <el-form-item label="书本编号" prop="isbn">
+              <el-input v-model="bookInfo.isbn"></el-input>
             </el-form-item>
             <el-form-item label="内容介绍" prop="introduce">
               <el-input type="textarea" v-model="bookInfo.introduce"></el-input>
@@ -228,7 +228,7 @@ export default {
         author: '', //作者名称',
         price: '', //价格 float
         introduce: '', //内容介绍',
-        ISBN: '', //书本编号' string
+        isbn: '', //书本编号' string
         imagesUrl: '', //书本封面（图片）',
         modifyCategory: '', //暂时用不到',
         ggct: '', //暂时用不到',
@@ -269,7 +269,7 @@ export default {
         author: '', //作者名称',
         price: '', //价格 float
         introduce: '', //内容介绍',
-        ISBN: '', //书本编号' string
+        isbn: '', //书本编号' string
         imagesUrl: '', //书本封面（图片）',
         modifyCategory: '', //暂时用不到',
         ggct: '', //暂时用不到',
@@ -335,7 +335,7 @@ export default {
         author: '', //作者名称',
         price: '', //价格 float
         introduce: '', //内容介绍',
-        ISBN: '', //书本编号' string
+        isbn: '', //书本编号' string
         imagesUrl: '', //书本封面（图片）',
         modifyCategory: '', //暂时用不到',
         ggct: '', //暂时用不到',

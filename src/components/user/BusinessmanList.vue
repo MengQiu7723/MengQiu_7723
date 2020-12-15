@@ -33,7 +33,7 @@
         <el-table-column type="index"></el-table-column>
         <el-table-column label="店铺ID" prop="sid"></el-table-column>
         <el-table-column label="店铺名字" prop="sellerName"></el-table-column>
-        <el-table-column label="用户名" prop="username"></el-table-column>
+        <el-table-column label="登录账户" prop="username"></el-table-column>
         <el-table-column label="密码" prop="password"></el-table-column>
         <el-table-column label="地址" prop="address"></el-table-column>
         <el-table-column label="操作">
@@ -73,7 +73,7 @@
 
     <!-- 添加用户的对话框 -->
     <el-dialog
-      title="添加用户"
+      title="添加商家"
       :visible.sync="addDialogVisible"
       width="50%"
       @close="addDialogClosed"
@@ -83,7 +83,7 @@
         :model="addForm"
         :rules="addFormRules"
         ref="addFormRef"
-        label-width="70px"
+        label-width="90px"
       >
         <el-form-item label="店铺ID" prop="sid">
           <el-input v-model="addForm.sid"></el-input>
@@ -94,7 +94,7 @@
         <el-form-item label="店铺地址" prop="address">
           <el-input v-model="addForm.address"></el-input>
         </el-form-item>
-        <el-form-item label="用户名" prop="username">
+        <el-form-item label="登录账户" prop="username">
           <el-input v-model="addForm.username"></el-input>
         </el-form-item>
         <el-form-item label="密码" prop="password">
@@ -110,7 +110,7 @@
 
     <!-- 修改用户的对话框 -->
     <el-dialog
-      title="修改用户"
+      title="修改商家"
       :visible.sync="editDialogVisible"
       width="50%"
       @close="editDialogClosed"
@@ -119,7 +119,7 @@
         :model="editForm"
         :rules="editFormRules"
         ref="editFormRef"
-        label-width="70px"
+        label-width="90px"
       >
         <el-form-item label="店铺ID" prop="sid">
           <el-input v-model="editForm.sid" disabled></el-input>
@@ -130,7 +130,7 @@
         <el-form-item label="店铺地址" prop="address">
           <el-input v-model="editForm.address"></el-input>
         </el-form-item>
-        <el-form-item label="用户名" prop="username">
+        <el-form-item label="登录账户" prop="username">
           <el-input v-model="editForm.username"></el-input>
         </el-form-item>
         <el-form-item label="密码" prop="password">
@@ -172,10 +172,10 @@ export default {
       // 添加表单的验证规则对象
       addFormRules: {
         username: [
-          { required: true, message: '请输入用户名', trigger: 'blur' },
+          { required: true, message: '请输入商家名字', trigger: 'blur' },
           {
             min: 3,
-            max: 10,
+            max: 15,
             message: '用户名的长度在3~10个字符之间',
             trigger: 'blur',
           },
@@ -207,7 +207,7 @@ export default {
   },
 
   methods: {
-   /*  get发起用户列表请求
+    /*  get发起用户列表请求
     async getData() {
       const { data: res } = await this.$http.get('seller/page', {
         params: { pageNo: this.pageNo, pageSize: this.pageSize },
@@ -224,7 +224,7 @@ export default {
     }, */
     async getData() {
       const { data: res } = await this.$http.get('seller/findAll')
-      console.log(res);
+      console.log(res)
       this.tableData = res.data
     },
 
@@ -272,7 +272,7 @@ export default {
     showEditDialog(id) {
       const editText = id
       console.log(editText)
-     /*  const { data: res } = await this.$http.get('admin/getById', {
+      /*  const { data: res } = await this.$http.get('admin/getById', {
         params: { id: id },
       })
       if (res.code !== 0) {
